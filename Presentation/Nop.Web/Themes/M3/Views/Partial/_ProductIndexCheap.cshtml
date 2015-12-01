@@ -1,0 +1,28 @@
+﻿@model List<Maticsoft.Model.Shop.Products.ProductInfo> 
+<div class="flashSaleWrap">
+    <div class="flashSaleTile">
+        <div class="flashSaleTileL">
+            特价推荐</div>
+    </div>
+    <div class="flashSaleCont">
+        @if (null != Model && Model.Count > 0)
+        {
+            for (int i = 0; i < (Model.Count > 5 ? 5 : Model.Count); i++)
+            {
+            <dl class="dl@(i + 1)">
+                <dt><a href="@Model[i].SeoUrl">
+                    <img width="224" height="286" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(Model[i].ThumbnailUrl1, "T207x270_")" />
+                </a></dt>
+                <dd class="ddwhite" style="overflow: hidden">
+                    <a href="@Model[i].SeoUrl">@Model[i].ProductName</a></dd>
+                <dd class="ddyellow">
+                    <a href="javascript:;">￥@Model[i].LowestSalePrice.ToString("F")</a></dd>
+            </dl>
+            }
+
+
+
+
+        }
+    </div>
+</div>

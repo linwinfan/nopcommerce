@@ -1,0 +1,114 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<Maticsoft.Model.Shop.PromoteSales.GroupBuy>
+@{
+    Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayout.cshtml";
+    string cid = Request.RequestContext.RouteData.Values["cid"] != null ? Request.RequestContext.RouteData.Values["cid"].ToString() : "0";
+    string regionId = Request.RequestContext.RouteData.Values["regionid"] != null ? Request.RequestContext.RouteData.Values["regionid"].ToString() : "643";
+    string mod = Request.RequestContext.RouteData.Values["mod"] != null ? Request.RequestContext.RouteData.Values["mod"].ToString() : "default";
+}
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+    <script type="text/javascript" src="/Areas/Shop/Themes/M3/Content/scripts/jquery.soChange-min.js"></script>
+
+<style type="text/css">
+
+    
+     #footerWrap
+     {
+         margin-top: 0 !important;
+     }
+    .timespan
+    {
+        float: none !important;
+        color: #333 !important;
+        font-size: 14px !important;
+        font-weight: normal !important;
+    }
+    select
+    {
+        min-height: 30px;
+    }
+    .txtenddate span
+    {
+        font-size: 12px;
+        color: #ccc;
+    }
+</style>
+<link href="/Areas/Shop/Themes/M3/Content/styles/tuangou.css" rel="stylesheet" type="text/css">
+<link href="/Areas/Shop/Themes/M3/Content/styles/smSlider.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+<script src="/Areas/Shop/Themes/M3/Content/Scripts/timeCountDown.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".all-goods").addClass("all-cate-goods");
+        $(".navWrap").addClass("prosaleHeader");
+        $(".nav").addClass("prosaleNav");
+        $(".nav li a").css({"color":"#fff","border-right":"none"});
+        $(".addWrap").hide();
+        $("select:eq(2)").hide();
+        $("#arealist").load($Maticsoft.BasePath + "ProSales/GetArea/@regionId");
+        $("select:eq(1)").die("change").live("change", function () {
+            $("select:eq(2)").hide();
+            window.location.href = $Maticsoft.BasePath + "ProSales/GroupBuy/" + $(this).val();
+        });
+        $(".all-goods a").css("background", "none");
+
+    });
+</script>
+
+<div class="w990Wrap">
+    <!--w990开始-->
+    <div class="w990">
+        <!--section1开始-->
+        <div class="section1">
+            <!--smSlider开始-->
+            <!--banner焦点图开始-->
+            <!--banner焦点图脚本开始-->
+            <!--<script src="js/jquery.min.js"></script>-->
+
+            <!--banner焦点图脚本结束-->
+            <div class="newBannerWrap">
+                <div class="new_banner">
+        <div class="rslides " style="height: 480px;">
+            @Html.Action("AdDetail", "Partial", new { id = 71, ViewName = "_Prosale_Ad_Banner" })
+        </div>
+        <ul class="rslides_tabs ">
+            @Html.Action("AdDetail", "Partial", new { id = 71, ViewName = "_Ad_Banner_Cons" })
+        </ul>
+
+                </div>
+                <!--小广告位开始-->
+                <ul class="smallAddWrap ">
+                    @Html.Action("AdDetail", "Partial", new { id = 72, ViewName = "_Prosale_Small_Ad" })
+                </ul>
+                <!--小广告位结束-->
+            </div>
+            <!--banner焦点图结束-->
+            <!--smSlider结束-->
+            <!--hotSellWrap开始-->
+            <div class="hotSellWrap">
+                @Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.Hot, Top = 1, ViewName = "_GroupBuyHot" })
+                @*          <ul class="hotSellDotWrap .f160x160">
+          	<li class="rslides_here"><a href="#" class="hotSellDot"></a></li>
+            <li><a href="#" class="hotSellDot"></a></li>
+            <li><a href="#" class="hotSellDot"></a></li>
+          </ul>*@
+            </div>
+            <!--hotSellWrap结束-->
+        </div>
+        <!--section1结束-->
+        <!--section2开始-->
+        <div class="section2">
+            <div class="groupSelectionTitle">
+                团购精选
+                        <div class="f-input" style="float: right;" id> <script src="/Scripts/jquery/jquery.guid.js" type="text/javascript"></script>
+                <input type="hidden" id="hfSelectedNode"  value="@ViewBag.regionId"/>
+                <script src="/Scripts/jquery/maticsoft.selectregion.js" handle="/RegionHandle.aspx" isnull="true" type="text/javascript"></script>
+            </div>
+            </div>
+            @{Html.RenderPartial("_BuyProductListGroup", Model);}
+        </div>
+        <!--section2结束-->
+        @Html.Action("AdDetail", "Partial", new { id = 73, ViewName = "_Group_Ad_Bottom" })
+    </div>
+    <!--w990结束-->
+</div>

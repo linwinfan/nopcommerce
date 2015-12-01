@@ -1,0 +1,31 @@
+﻿@using System.Web.Mvc.Html
+@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+@*网站前台模版*@
+}
+@section head{
+    @RenderSection("head", false)
+}
+
+    @Html.Action("Header", "Partial", new { area = "Shop" })
+    @Html.Action("Navigation", "Partial", new { area = "Shop", Theme = "M3" })
+    <div class="contentWrap">
+     <div id="nav" style="z-index: 9999;top: 141px">
+        <div class="area clearfix" >
+            <!--<div class="separate"></div>-->
+                <div class="category-content" id="guide_2">
+                    <div><span class="all-goods "><a href="javascript:;">全部商品分类</a></span></div>
+                    <div class="category">
+                        @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })</div>
+             </div>
+        </div>
+    </div>
+    @Html.Action("AdDetail", "Partial", new { id = 75, ViewName = "_Index_Cate_Banner" })
+   
+</div>
+    @RenderBody()
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+

@@ -1,0 +1,12 @@
+@charset "utf-8";
+.newBannerWrap{float:left;  width:740px; *overflow:hidden;}
+.new_banner{width:740px; height:360px; position:relative; margin:0 auto;}
+* +html .new_banner{width:740px; height:360px; position:absolute; top:181px; margin:0 auto 20px;}
+.rslides{width:100%; position:absolute; list-style:none; padding:0;}
+.rslides li{width:100%; height:360px;}
+.rslides li a{width:740px; height:360px; display:inline-block;}
+.rslides li a img{width:740px; height:360px; display:block; margin:0 auto; position:absolute;}
+.rslides_tabs{ position:absolute; left:50%; margin-left: -46px; bottom:20px;clear:both;text-align:center; z-index:998; }
+.rslides_tabs li{display:inline; float:none; _float:left; *float:left; margin-right:5px}
+.rslides_tabs a{ width:12px; height:12px; background:url(../images/dot-white.png) no-repeat; text-indent:-5em; overflow:hidden; display:block; float:left; margin-left:6px; border-radius:6px;}
+.rslides_tabs .rslides_here a{ background:url(../images/dot-red.png) no-repeat;}

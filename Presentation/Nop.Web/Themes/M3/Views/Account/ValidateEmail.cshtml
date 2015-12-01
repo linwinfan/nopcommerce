@@ -1,0 +1,66 @@
+﻿  @{
+      Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+}
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+<script type="text/javascript">
+    $(function () {
+        var msgvalue = $('#hidmsg').val();
+        if (msgvalue == "Success") {
+            $('#hyanzheng').css({ 'color': 'rgb(104, 223, 66)' }).text('恭喜，' + $('#hidemail').val() + '邮箱已通过验证');
+        } else {
+            $('#hyanzheng').text(msgvalue);
+        }
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+    });
+
+</script>
+<input type="hidden" value="@ViewBag.Msg" id="hidmsg" />
+<input type="hidden" value="@ViewBag.email" id="hidemail"/>
+<div class="contentWrap">
+    <!--商品分类开始-->
+<div id="nav">
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+</div>
+
+<div class="aw m0u clearfix" style="width: 1200px; margin: 0 auto;">
+    <div class="findpass_centent boxbg">
+        <h3 style="font-size: 18px; font-weight: normal; padding-top: 18px;">验证成功</h3>
+        <div class="findpass_tip" style="margin-top: 5px;">
+            <div class="successk" style="border: 1px solid #e4e4e4">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td width="1%" rowspan="5" align="center">
+                                <img src="/Areas/Shop/Themes/M3/Content/images/success.png" width="180" height="133"></td>
+                            <td height="45" align="left">
+                                <span class="successk_tip" id="hyanzheng"></span>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td height="35" colspan="2" align="left">恭喜您成为@(ViewBag.WebName)会员,您已经完成注册,请点击下方按钮进行登录。</td>
+                        </tr>
+                        <tr>
+                            <td width="60%" height="60" colspan="2" align="left" valign="middle">
+                                <a class="btn" href="@(ViewBag.BasePath)Account/Login" target="_self"><span>点我登录</span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

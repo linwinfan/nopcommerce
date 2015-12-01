@@ -1,0 +1,64 @@
+﻿@using System.Web.UI.WebControls
+<script type="text/javascript">
+    function show(mode) {
+        document.getElementById('ulshopconceal').style.display = mode;
+    }
+    $(function () {
+        $('.loginLayer').load($Maticsoft.BasePath + 'Partial/Login?timespan=' + new Date().format('yyyyMMddhhmmssS'));
+    });
+</script>
+ 
+
+<!--siteNavWrap开始-->
+	<div class="siteNavWrap" >
+        <div class="siteNav" style="width: 990px;">
+            <ul class="quickMenu">
+               @* <li class="weiboLogin">
+                	<i class="icon1"><img src="/Areas/Shop/Themes/M3/Content/images/weibo.png" /></i>
+                    <a href="@(ViewBag.Basepath)social/sina">微博登录</a>
+                </li>
+                <li class="QQLogin">
+                    <i class="icon2"><img src="/Areas/Shop/Themes/M3/Content/images/QQ.png" /></i>
+                    <a href="@(ViewBag.Basepath)social/qq">QQ登录</a>
+                </li>*@
+                @*<li class="loginInfo"><a href="@(ViewBag.Basepath)Account/Login">登录</a></li>
+                <li class="register"><a href="@(ViewBag.Basepath)Account/Register">注册</a></li>*@
+                <li  class="loginLayer" style="float: left;">
+                </li>
+                <li id="myShop" onmouseover="show('block')" onmouseout="show('none')"><a href="@(ViewBag.Basepath)UserCenter">我的商城</a><i class="icon3"><img src="/Areas/Shop/Themes/M3/Content/images/arrow.png" /></i>
+                	<ul id="ulshopconceal">
+                        <li><a rel="nofollow" href="@(ViewBag.Basepath)UserCenter/Orders">我的订单</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/MyFavor">我的收藏</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/PointsDetail">我的积分</a></li>
+                        <li><a href="@(ViewBag.Basepath)SNS">我的社区</a></li>
+                	</ul>
+           		</li>
+                <li class="phone">
+                	<i class="icon4"><img src="/Areas/Shop/Themes/M3/Content/images/APP.png" /></i>
+                    <a href="@(ViewBag.BasePath)Download/Android">APP下载</a>
+                </li>
+            </ul>
+      </div>
+	</div>
+<!--siteNavWrap结束-->
+<!--header开始-->
+<div id="headers" class="shopping" style="width: 990px;margin: 15px auto;">
+    <div id="shd2">
+        <div class="wrap clearfix">
+            <div class="logo fl mb5">
+    <a href="@(ViewBag.BasePath)"  target="_blank">
+        <img src="@ViewBag.Logo" width="270" height="62"></a></div>
+            
+    <div class="wrap">
+        <ul class="step" id=""><!--step2-->
+           <li class="fore1">1.填写充值金额<b></b></li>
+   				<li class="fore2">2.成功申请充值</li>
+        </ul>
+    </div>
+
+        </div>
+    </div>
+</div>
+<!--header结束-->
+<!--购物车开始-->
+

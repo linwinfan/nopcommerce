@@ -1,0 +1,20 @@
+﻿@model List<Maticsoft.Model.Shop.Products.AttributeInfo>
+@if (Model == null) { return; }
+
+    <div class="prdDetail">
+        <p class="cpcs">
+            产品参数：</p>
+        <ul class="xinxi">
+            @foreach (Maticsoft.Model.Shop.Products.AttributeInfo item in Model)
+            {
+                if (item.AttributeValues != null && item.AttributeValues.Count > 0)
+                {
+
+                    string xx = string.Join(" ", item.ValueStr);
+                <li title="@xx">@item.AttributeName：@Maticsoft.Common.StringPlus.SubString(xx, 20, "..")</li>
+            
+                }
+            }
+        </ul>
+    </div>
+

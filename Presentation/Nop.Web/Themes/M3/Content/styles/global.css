@@ -1,0 +1,192 @@
+@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {margin: 0;padding: 0;}
+fieldset,img{border:0;}
+:focus{outline:0;}
+body{line-height:22px;font-size:12px;color:#666;background: #fff; font-family:}
+address, caption, cite, code, dfn, em, th, var, optgroup,i{ font-style: normal; font-weight: normal;}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+abbr, acronym { border: 0; font-variant: normal;}
+input, button, textarea, select, optgroup, option { font-family: inherit; font-size: 12px; font-style: inherit; font-weight: inherit;}
+code, kbd, samp, tt { font-size: 100%;}
+input, button, textarea, select{*font-size: 100%;}
+ol, ul {list-style:none;}
+table {border-collapse:collapse;border-spacing:0;}
+caption{text-align: left;}
+:link,:visited ,ins {text-decoration: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none;}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+body,button,input,select,textarea{font:12px/1.5  'Microsoft YaHei','宋体';}
+address,cite,dfn,em,var{font-style:normal;}
+small{font-size:12px;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+legend{color:#000;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+.clearfix:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.remm_brand {border-bottom:1px solid #f5e2b4; padding-bottom:10px;}
+
+/****文字****/
+.p_title { font-size:12px; color:#333; line-height:16px; height:46px; padding:0px 10px;}
+.p_title a { font-size:12px; color:#333;}
+
+/**tab按钮**/
+#cl .sub-light{float:left;display:inline;}
+#cl .sub-light a{background-position:right 0;}
+#cl .sub-light span{background-position:-92px 0;}
+#cl .sub-light a:hover{background-position:right -29px;}
+#cl .sub-light a:hover span{background-position:-92px -29px;}
+#cl .sub-light a,.sub-light a:hover{padding-right:15px;cursor:pointer;}
+#cl .sub-light span,.sub-light a:hover span{padding-left:15px;position:relative;}
+#cl .sub-light a,.sub-light span,.sub-light a:hover,.sub-light a:hover span{background-image:url(/images/bt.gif);font-weight:bold;font-size:12px;color:#f08200;text-decoration:none;height:28px; line-height:28px; display:inline-block;float:left;}
+
+a{color:#666;text-decoration:none;}
+a:hover{color:#b80000;text-decoration: underline;}
+.block,a.block,a.block:hover{color:#000;}
+.green,a.green,a.green:hover{color:#228036;}
+.red,a.red,a.red:hover{color:#f70503;}
+.blues,a.blues,a.blues:hover{color:#256eb1;}
+.orange,a.orange,a.orange:hover{color:#ff6600;}
+.oranges,a.oranges,a.oranges:hover{color:#f23900;}
+.orange_dark,a.orange_dark,a.orange_dark:hover{color:#e4a100;}
+.red_dark,a.red_dark,a.red_dark:hover{color:#b80000;}
+.gray,a.gray,a.gray:hover{color:#333;}
+.gray9,a.gray9,a.gray9:hover{color:#999;}
+.white,a.white,a.white:hover{color:#fff; text-decoration:none;}
+.yellow,a.yellow,a.yellow:hover{color:#ff8d04;}
+
+
+.titleline{line-height:14px; height:46px; margin-top:5px!important; _margin-top:4px; overflow:hidden; width:100%;}
+.titleline a { color:#333; line-height:14px; text-decoration:none; }
+.titleline a:hover { color:#ff0000; line-height:14px; text-decoration:underline; }
+
+.indextline{line-height:16px; height:46px; margin-top:5px; padding:0px 15px;}
+.indextline a {color:#666; line-height:16px; text-decoration:none; }
+.indextline a:hover { color:#ff0000; line-height:16px; text-decoration:underline; }
+
+
+.fwb{font-weight:bold;}
+.fwn{font-weight:normal;}
+.fl{float:left;}
+.fr{float:right;}
+.tdn{text-decoration:none;}
+.tdu{text-decoration:underline;}
+.tdlt{text-decoration:line-through;}
+
+.p10p{padding:10px;}
+
+.pt10p{padding-top:10px;}
+.pt5p{padding-top:5px;}
+.plr5p{ padding:0 5px;}
+.ptb5p{ padding:5px 0;}
+.pl10p{ padding-left:10px;}
+.pl20p{ padding-left:20px;}
+.pl5p{ padding-left:5px;}
+.pr10p{ padding-right:10px;}
+.pb10p{ padding-bottom:10px;}
+.pt20p{padding-top:20px;}
+.mt5p{margin-top:5px;}
+.mt15p{margin-top:20px;}
+.mt10p{margin-top:10px;display:inline;}
+.mt20p{margin-top:20px;display:inline;}
+.ml5p{margin-left:5px;display:inline;}
+.ml10p{margin-left:10px;display:inline;}
+.mr5p{margin-right:5px;display:inline;}
+.mr10p{margin-right:10px;display:inline;}
+.mb10p{margin-bottom:10px;}
+.mb20p{margin-bottom:20px;}
+.mtb5{margin-bottom:5px;margin-top:5px;}
+.lh22p{line-height:22px;}
+.lh24p{line-height:24px;}
+.lh26p{line-height:26px;}
+.lh28p{line-height:28px;}
+.lh30p{line-height:30px;}
+
+
+
+.fs12p{font-size:12px;}
+.fs13p{font-size:13px;}
+.fs14p{font-size:14px;}
+.fs16p{font-size:16px;}
+.fs18p{font-size:18px;}
+.fs20p{font-size:20px;}
+.fs24p{font-size:24px;}
+.fs28p{font-size:28px;}
+.fs30p{font-size:30px;}
+
+.w50p{width:50px;}
+.w70p{width:70px;}
+.w155p{width:155px;}
+.w185p{width:185px;}
+.w345p{width:345px;}
+.w390p{width:390px;}
+.w500p{width:500px;}
+.w260p{width:260px;}
+
+.h22p{height:22px;}
+
+.db{display:block;}
+.di{display:inline;}
+.tal{text-align:left;}
+.tac{text-align:center;}
+.tar{text-align:right;}
+.clearboth{clear:both;height:1px;overflow:hidden; display:block;}
+.check_box{ margin-bottom:1px; margin-top:-1px; vertical-align:middle;}
+
+.price{font-family:arial,verdana;}/* 人民币符号双划线 */
+.ffw{font-family:'微软雅黑';}
+.ffs{font-family:'宋体';}
+.ffa{ font-family:Arial;}
+.vam{vertical-align:middle;}
+.vat{vertical-align:top;}
+.vab{vertical-align:bottom;}
+.clearfix:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+
+.border_e6{border:1px solid #e6e6e6;}
+.toolbar_mod,.header,.hot_screen,.floor_title,.floor_box,.subfooter {margin:0 auto;width:1002px;}
+
+.height20_oh{height:20px;overflow:hidden;}
+
+.vh{voerflow:hidden;}
+
+
+/**弹出层**/
+.order_progress_bar1{ width:366px;height:15px; overflow:hidden;margin-top:10px;padding-left:40px;display: inline;}
+ .my-order tr td {line-height:16px; height:60px; vertical-align:middle;}
+
+.banktransfer-popup-input{border:1px solid #ccc;width:250px;height:22px;line-height:22px;padding:0 5px;}
+.banktransfer-popup-textarea{border:1px solid #ccc;width:350px;height:22px;line-height:22px;height:65px;resize:none;padding:0 5px;}
+.banktransfer-popup-public{width:565px;z-index:9999;position:absolute; background-color:#fff;}
+.banktransfer-popup-public .banktransfer-popup-title{background:#f1f1f1;position:relative;height:30px;padding-left:10px;line-height:30px;}
+.banktransfer-popup-public .banktransfer-popup-title h2{color:#f08300;font-size:14px;font-weight:bold;}
+.banktransfer-popup-public .banktransfer-popup-title .left,.banktransfer-popup-public .banktransfer-popup-title .right,.banktransfer-popup-public .banktransfer-popup-title .close,.banktransfer-popup-submits{background:url(/images/banktranfer_popup.png) no-repeat;}
+.banktransfer-popup-public .banktransfer-popup-title .left{width:7px;height:30px;background-position:0 0;display:block;position:absolute;left:0;top:0;}
+.banktransfer-popup-public .banktransfer-popup-title .right{width:7px;height:30px;background-position:-10px 0;display:block;position:absolute;right:0;top:0;}
+.banktransfer-popup-public .banktransfer-popup-title .close{width:20px;height:19px;background-position:-19px 0;display:block;position:absolute;right:7px;top:5px;cursor:pointer;}
+.banktransfer-popup-submits{border:none;width:83px;height:28px;line-height:28px;cursor:pointer;background-position:0 -31px;color:#fff;text-align:center;font-weight:bold;margin-left:120px;}
+.banktransfer-popup-public .banktransfer-popup-content{border:1px solid #cdcdcd;overflow:hidden;zoom:1;}
+.banktransfer-popup-content-h{color:#444;font-size:14px;font-weight:bold;border-bottom:1px solid #ddd;margin:0 10px; line-height:30px;height:30px;}
+.banktransfer-popup-content-u {padding-top:20px;}
+.banktransfer-popup-content-u li{clear:both;padding:5px 0;}
+.banktransfer-popup-content-u p{width:80px;margin-left:40px;display:inline;float:left;}
+.banktransfer-popup-content-u p span{color:#f08300;}
+.banktransfer-popup-text{ padding:10px 20px 20px; line-height:22px;color:#666;}
+
+.banktransfer-popup-content-u .pp_time{position:relative;}
+.banktransfer-popup-content-u .pp_time em{position:absolute;left:320px;top:5px; background:url(/images/time.jpg) no-repeat;width:14px;height:15px;}
+.banktransfer-popup-content-u .data1{ cursor:pointer;}
+.banktransfer-popup-k{line-height:24px;padding:20px 0; overflow:hidden;zoom:1;}
+.banktransfer-popup-k img{}
+.banktransfer-popup-k h2{color:#f08300;font-weight:bold;}
+.fl{float:left;}
+.m{margin:0px;}
+.orange{color:#f08300;}
+.lh28p{line-height:28px; font-size:1.5em;}
+
+
+.inside-brand-categories p{ line-height:24px;}
+.b1_dashed {border-bottom:1px dashed #ddd; }

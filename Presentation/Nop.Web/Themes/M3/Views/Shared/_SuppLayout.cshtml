@@ -1,0 +1,33 @@
+﻿@using System.Web.Mvc.Html
+@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+@*网站前台模版*@
+}
+@section head{
+    @RenderSection("head", false)
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/storestyle.css"/>
+    <link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/search.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+}
+
+    @Html.Action("Header", "Partial", new { area = "Shop" })
+    @Html.Action("Navigation", "Partial", new { area = "Shop", Theme = "M3" })
+    <div class="contentWrap">
+    @Html.Partial("/Areas/Shop/Themes/M3/Views/Partial/_CateAll.cshtml")
+    </div>
+    @Html.Action("Header", "Store", new { area = "Shop" })
+    @RenderBody()
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+
+    <script type="text/javascript">
+        $(function () {
+            $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+        });
+</script>

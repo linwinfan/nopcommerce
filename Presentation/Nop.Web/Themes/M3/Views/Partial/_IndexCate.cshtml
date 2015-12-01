@@ -1,0 +1,23 @@
+﻿@model List<Maticsoft.Model.Shop.Products.CategoryInfo>
+
+                <div class="ContNav">
+                	<dl class="selling">
+                    	<dt>热卖</dt>
+	                    <dd>
+	                        @if (null != Model && Model.Count > 0)
+                         {
+                             foreach (var item in Model)
+                             {
+	                                 <a href="@(ViewBag.BasePath)product/@item.CategoryId" target="_blank">@item.Name</a>
+                             }
+	                        }
+	                       
+
+	                    </dd>
+                    </dl>
+                </div>
+
+
+
+            
+    

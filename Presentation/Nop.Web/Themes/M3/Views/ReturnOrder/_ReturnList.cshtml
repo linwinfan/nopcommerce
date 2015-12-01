@@ -1,0 +1,80 @@
+﻿@using Webdiyer.WebControls.Mvc
+ @model   PagedList<Maticsoft.Model.Shop.ReturnOrder.ReturnOrders> 
+ <div class="user_rechargedetial user_detialclear">
+    <a href="@(ViewBag.BasePath)ReturnOrder/Index">申请退货</a>
+    <a href="javascript:;"  class="curr" >查看退货记录</a>                                                       
+</div>
+   @if (Model != null)
+   {
+    <table width="100%" border="0" class="user_dingdan" cellspacing="0" cellpadding="0">
+    <tr>
+        <th>退货编号</th>
+        <th>订单编号</th>
+        <th>商品</th>
+        <th>申请时间</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+     @foreach (var item in Model)
+     {
+         <tr>
+            <td style="width: 130px;"  class="bor">@item.ReturnOrderCode</td>
+            <td style="width: 130px;"  class="bor">@item.OrderCode</td>
+            <td style="width: 220px;"  class="bor">
+                 @if (item.Items != null && item.Items.Count > 0)
+                 {
+                     foreach (var returnItem in item.Items)
+                     {    
+                            <a href="@(ViewBag.BasePath)Product/Detail/@returnItem.ProductId"  class="img-box" clstag="click|keycount|orderinfo|order_product" target="_blank">
+                                <img title="@returnItem.Name" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(returnItem.ThumbnailsUrl, "T50X65_")" width="50" height="65"  onerror="this.onerror='';this.src='/Content/themes/base/Shop/images/none.png'" >
+                            </a>
+                     }
+                 }
+            </td>
+            <td style="width: 100px;"  class="bor">@item.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            <td class="bor">@item.MainStatusStr</td>
+            <td class="bor"><a href="@(ViewBag.BasePath)ReturnOrder/ReturnInfo/@item.ReturnOrderId"  style="color: #1859a5;"  >查看</a>  
+            @if (item.Status==(int)Maticsoft.Model.Shop.ReturnOrder.EnumHelper.Status.UnHandle)
+            {
+            <a href="javascript:;" class="cancel" rid="@item.ReturnOrderId" style="color: #1859a5;" >取消</a> 
+            }    
+            
+                            </td>
+         </tr>
+     }
+    </table>
+    } else
+    {
+            <table width="100%" border="0" class="user_dingdan" cellspacing="0" cellpadding="0">
+            <tr>
+            <td style="padding: 10px;font-size: large;">亲，您暂时还退货记录哦</td>
+            </tr>
+        </table>
+    }
+         <center>
+                @Html.AjaxPager(Model, new PagerOptions
+           {
+               PageIndexParameterName = "pageIndex",
+               NumericPagerItemCount = 10,
+               NumericPagerItemWrapperFormatString = "<p>{0}</p>",
+               NavigationPagerItemWrapperFormatString = "<p>{0}</p>",
+               CssClass = "in_pages",
+               SeparatorHtml = ""
+           }, new AjaxOptions { UpdateTargetId = "LoadList" })
+            </center>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

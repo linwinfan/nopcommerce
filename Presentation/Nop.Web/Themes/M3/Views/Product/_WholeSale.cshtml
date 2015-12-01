@@ -1,0 +1,65 @@
+﻿@model Maticsoft.ViewModel.Shop.SalesModel
+ @if (Model != null && Model.SalesItems!=null&&Model.SalesItems.Count > 0)
+ {
+     <div class="box-sub">
+     <div class="hd">
+                    <h2>
+                        批发优惠</h2>
+                </div>
+     <div class="bd">
+          <ul class="promotionList">
+             @foreach (var item in Model.SalesItems)
+             {  
+                 <li class="pGift">
+                     @if (item.UserRankList != null)
+                     {
+                         @:会员级别为
+                      for (int i = 0; i < item.UserRankList.Count;i++)
+                      {
+                          if (i>0)
+                          {
+                              @:、
+                          }
+                          <span class="h">@item.UserRankList[i].Name</span>
+                      }
+                       @:的用户,
+                     }
+                     
+
+                     @if (Model.SalesRule.RuleUnit == 0)
+                     {
+                         if (item.ItemType == 0)
+                         {
+                             @:满<span class="h">@item.UnitValue</span>个，优惠<span class="h">@(100-item.RateValue)</span>%
+                         }
+                         if (item.ItemType == 1)
+                         {
+                             @:满<span class="h">@item.UnitValue</span>个，总价优惠<span class="h">@item.RateValue</span>元
+                         }
+                         if (item.ItemType == 2)
+                         {
+                             @:满<span class="h">@item.UnitValue</span>个，每个优惠<span class="h">@item.RateValue</span>元
+                         }
+                     }
+                     else
+                     {
+                         if (item.ItemType == 0)
+                         {
+                             @:满<span class="h">@item.UnitValue</span>元，优惠<span class="h">@(100 - item.RateValue)</span>%
+                         }
+                         if (item.ItemType == 1)
+                         {
+                             @:满<span class="h">@item.UnitValue</span>元，总价优惠<span class="h">@item.RateValue</span>元
+                         }
+                         if (item.ItemType == 2)
+                         {
+                         
+                             @:满<span class="h">@item.UnitValue</span>元，每个优惠<span class="h">@item.RateValue</span>元
+                         }
+                     }
+                 </li>
+             }
+         </ul>
+     </div>
+              </div>
+ }

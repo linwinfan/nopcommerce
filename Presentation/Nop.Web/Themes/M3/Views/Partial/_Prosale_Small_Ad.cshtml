@@ -1,0 +1,10 @@
+﻿@model List<Maticsoft.Model.Settings.Advertisement>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <li><a href="@item.NavigateUrl" target="_blank">
+                    <img src="@item.FileUrl" style="width: 246px;height: 120px;"/>
+                </a></li>
+                }
+            }

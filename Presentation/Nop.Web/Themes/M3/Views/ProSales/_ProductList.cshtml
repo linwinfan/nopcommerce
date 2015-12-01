@@ -1,0 +1,109 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Maticsoft.ViewModel.Shop.ProductListModel
+
+@if (Model.ProductPagedList != null)
+{
+    <div class="hot_recommend" id="hot_recommend" style="background-position: 0px -392px;background-repeat: repeat-x;position: relative;">
+
+        <div class=" recommendlist">
+            <ul id="J_lazyload">
+                @foreach (var item in Model.ProductPagedList)
+                {
+                    <li class="Selection1 Selection@(Model.ProductPagedList.FindIndex(i=>i==item) % 3 + 1)">
+                        <div class="countDown">
+                        <p class="tac mtb5">
+                            <a href="@(ViewBag.BasePath)Product/ProSaleDetail/@item.CountDownId">
+                                <img width="300px" height="300px" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailUrl1, "T350X350_")" width="207" height="270">
+                            </a>
+                        </p>
+                        <p class="titlemc">
+                            <a href="@(ViewBag.BasePath)Product/ProSaleDetail/@item.CountDownId">@item.ProductName</a>
+                        </p>
+                        <p class="duv">
+                           抢购价： <span class="Pricesize lowestPrice">￥<span >@(item.ProSalesPrice.ToString("F"))</span></span>
+                        </p>
+                            <div class="time_line">
+                                                            @if (item.MarketPrice.HasValue)
+                            {
+                                <span class="oldsize">市场价： @item.MarketPrice.Value.ToString("C")</span>
+                            }  
+                                <p class="unit-time" data-time="@item.ProSalesEndDate"   endDate="@((item.ProSalesEndDate.ToUniversalTime() - Convert.ToDateTime("1970-01-01")).TotalMilliseconds.ToString("0"))"  Product="@item.ProductId"  id="txtenddate_@(item.ProductId)">
+                                    <span  class="day" id="dayEnd_@(item.ProductId)">00</span> 天
+                                    <span class="hour" id="hourEnd_@(item.ProductId)">00</span> 时
+                                    <span class="minute" id="minEnd_@(item.ProductId)">00</span> 分
+                                    <span  class="second" id="secEnd_@(item.ProductId)" >00</span> 秒
+                                </p>  
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <div style="clear: both">
+            </div>
+        </div>
+        <div class="page">
+            <div class="link">
+                <div>
+                    @Html.AjaxPager(Model.ProductPagedList, new PagerOptions
+               {
+                   ShowDisabledPagerItems = true,
+                   AlwaysShowFirstLastPageNumber = true,
+                   PageIndexParameterName = "pageIndex",
+                   NumericPagerItemCount = 10,
+                   CurrentPagerItemWrapperFormatString = "<span class=\"current\">{0}</span>",
+                   NumericPagerItemWrapperFormatString = "<span>{0}</span>",
+                   NavigationPagerItemWrapperFormatString = "<span>{0}</span>",
+                   CssClass = "sabrosus",
+                   SeparatorHtml = ""
+               }, new AjaxOptions { UpdateTargetId = "hot_recommend" })
+                    <input type="hidden" id="hfCurrentPageAjaxStartIndex" value="@ViewBag.CurrentPageAjaxStartIndex" />
+                    <input type="hidden" id="hfCurrentPageAjaxEndIndex" value="@ViewBag.CurrentPageAjaxEndIndex" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+}
+
+<script type="text/javascript">   
+    function countDown(time, val) {
+        var day_elem = $(val).find('.day');
+        var hour_elem = $(val).find('.hour');
+        var minute_elem = $(val).find('.minute');
+        var second_elem = $(val).find('.second');
+
+        var end_time = new Date(time).getTime(),//月份是实际月份-1
+        sys_second = (end_time - new Date().getTime()) / 1000;
+        var timer = setInterval(function () {
+            if (sys_second > 1) {
+                sys_second -= 1;
+                var day = Math.floor((sys_second / 3600) / 24);
+                var hour = Math.floor((sys_second / 3600) % 24);
+                var minute = Math.floor((sys_second / 60) % 60);
+                var second = Math.floor(sys_second % 60);
+                day_elem && $(day_elem).text(day);//计算天
+                $(hour_elem).text(hour < 10 ? "0" + hour : hour);//计算小时
+                $(minute_elem).text(minute < 10 ? "0" + minute : minute);//计算分钟
+                $(second_elem).text(second < 10 ? "0" + second : second);//计算秒杀
+            } else {
+                clearInterval(timer);
+            }
+        }, 1000);
+    }
+    $(function () {
+        $(".unit-time").each(function () {
+            countDown($(this).attr("data-time"),$(this));
+        });
+//        $(".shoujian").each(function () {
+//            $(this).text(GetRandomNum(135, 462));
+//        });
+    });
+
+//    function GetRandomNum(Min, Max) {
+//        var Range = Max - Min;
+//        var Rand = Math.random();
+//        return (Min + Math.round(Rand * Range));
+//    }
+</script>
+ 

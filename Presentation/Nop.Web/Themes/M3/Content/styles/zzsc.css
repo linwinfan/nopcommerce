@@ -1,0 +1,180 @@
+@charset "utf-8";
+.newBannerWrap{width:100%; margin-bottom:20px; *margin-bottom:5px;}
+.new_banner{width:100%; height:480px; position:relative; margin:0 auto;}
+* +html .new_banner{width:100%; height:480px; position:absolute; top:181px; margin:0 auto 20px;}
+.rslides{width:100%; position:absolute; list-style:none; padding:0;}
+.rslides li{width:100%; height:480px; background:#c2151f;}
+.rslides li a{width:1200px; height:480px; display:inline-block;}
+.rslides li a img{width:1200px; height:480px; display:block; margin:0 auto; position:absolute; left: 50%; margin-left: -600px;}
+/*左右箭头开始*/
+/*.rslides_nav{ width:36px; height:36px; background-image:url(../images/banner_new.png); display:block; position:absolute;  text-indent:-10em; overflow:hidden;}
+.prev{ background-position:0 0; left:-40px; top:222px;}
+.prev:hover{ background-position:0 -36px;}
+.next{ background-position:-36px 0; right:-40px; top:222px;}
+.next:hover{ background-position:-36px -36px;}*/
+/*左右箭头结束*/
+.rslides_tabs{ position:absolute; left:50%; margin-left: -46px; bottom:20px;clear:both;text-align:center; z-index:9999; }
+.rslides_tabs li{display:inline; float:none; _float:left; *float:left; margin-right:5px}
+.rslides_tabs a{ width:12px; height:12px; background:url(../images/dot-white.png) no-repeat; text-indent:-5em; overflow:hidden; display:block; float:left; margin-left:6px; border-radius:6px;}
+.rslides_tabs .rslides_here a{ background:url(../images/dot-red.png) no-repeat;}
+
+.in_pages{width:100%;margin-top: 20px;text-align: center; *line-height: 26px; overflow:hidden;}
+.in_pages p{  margin-right:4px; text-align:center; color:red; font-family:"微软雅黑";  display:inline-block; *display: inline; font-size:13px; font-weight:bold;}
+.in_pages p a{ color:red; display:inline-block; *display: inline; background:#E8F0EF ;border:#E8F0EF 1px solid; padding:2px 8px 2px 8px; }
+.in_pages p a:hover{ padding:2px 8px 2px 8px; background:#fff; color:orange;display:inline-block; *display: inline; background:#fff;border:#E8F0EF 1px solid; }
+.in_pages .in_s { padding:2px 8px 2px 8px; background:#fff; color:orange;display:inline-block; *display: inline; background:#fff;border:#E8F0EF 1px solid; }
+
+.user_titlebottom {
+height: 50px;
+line-height: 40px;
+border-left: solid 1px #eeeeee;
+border-right: solid 1px #eeeeee;
+border-bottom: solid 1px #eeeeee;
+text-indent: 20px;
+font-size: 12px;
+}
+.user_titlebottom span {
+font-weight: bold;
+color: red;
+}
+.usercenterbtn {
+background-image: url(../images/btn_prepaid.png);
+line-height: 30px;
+width: 58px;
+margin-right: 10px;
+display: inline-block;
+cursor: pointer;
+text-decoration: none;
+}
+.col-main .withdraw {
+margin-right: 10px;
+}
+.user_rechargedetial a {
+background: url(../images/tab-01.gif) 0 -28px;
+float: left;
+line-height: 29px;
+margin-right: 3px;
+text-align: center;
+height: 27px;
+padding: 0 10px;
+overflow: hidden;
+position: relative;
+margin-top: 10px;
+border-top-left-radius: 0.5em;
+border-top-right-radius: 0.5em;
+-webkit-border-top-left-radius: 0.5em;
+-webkit-border-top-right-radius: 0.5em;
+-moz-border-radius-topleft: 0.5em;
+-moz-border-radius-topright: 0.5em;
+border-left: 1px solid #eeeeee;
+border-right: 1px solid #eeeeee;}
+.user_rechargedetial a.curr {
+color: #ff6600;
+font-weight: bold;
+background-position: 0 -85px;
+border-left: 1px solid #fdb933;
+border-right: 1px solid #fdb933;
+}
+/***搜索店铺样式开始****/
+
+   #flagship-store div{display: inline-block;}
+    #flagship-store {
+height: 60px;
+padding: 5px 20px 5px 5px;
+border: 1px solid #ddd;
+margin-bottom: 10px;
+}
+#flagship-store .store-info h2 
+{
+padding-top: 8px;
+line-height: 24px;
+font-size: 16px;
+color: #333;
+}
+#flagship-store .store-info .shop-about {
+overflow: hidden;
+height: 24px;
+line-height: 24px;
+color: #999;
+}
+#flagship-store a.go-store {
+float: right;
+width: 81px;
+height: 30px;
+border: 1px solid #ddd;
+border-radius: 2px;
+margin-top: 15px;
+background: #F7F7F7;
+line-height: 30px;
+text-align: center;
+text-decoration: none;
+cursor: pointer;
+font-weight: bold;
+color: #000;
+background: -moz-linear-gradient(top,#f7f7f7,#f2f2f2);
+background: -webkit-gradient(linear,0 0,0 100%,from(#f7f7f7),to(#f2f2f2));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7f7f7", endColorstr="#f2f2f2");
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7f7f7", endColorstr="#f2f2f2")";
+}
+#flagship-store a.go-store:hover {
+box-shadow: 0 1px 1px rgba(0,1,1,0.08);
+border-color: #ccc;
+cursor: pointer;
+color: #333;
+background: -moz-linear-gradient(top,#f9f9f9,#f6f6f6);
+background: -webkit-gradient(linear,0 0,0 100%,from(#f9f9f9),to(#f6f6f6));
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9f9", endColorstr="#f6f6f6");
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr="#f9f9f9", endColorstr="#f6f6f6")";
+}
+#flagship-store .store-logo {
+float: left;
+width: 180px;
+height: 60px;
+margin-right: 20px;
+}
+#flagship-store .store-info {
+float: left;
+width: 250px;
+height: 60px;
+margin-right: 20px;
+}
+#flagship-store .store-number {
+float: left;
+width: 172px;
+height: 52px;
+padding-top:15px;
+line-height: 24px;
+}
+#flagship-store .store-info {
+width: 200px;
+margin-right: 44px;
+}
+.grade {
+position: relative;
+overflow: hidden;
+width: 78px;
+background-position: 0 -18px;
+}
+.grade, .grade em {
+display: inline-block;
+height: 18px;
+background: url(../images/grade.png) 0 0 no-repeat;
+_background: url(../images/grade-ie6.png) 0 0 no-repeat;
+}
+#evaluate em {
+float: left;
+margin-left: -25px;
+}
+#evaluate span {
+margin-top: 3px;
+    width: 80px;
+    clear: none;
+}
+
+dd#evaluate 
+{
+    width:200px;
+display: block;
+-webkit-margin-start: 40px;
+}
+/* 搜索店铺样式结束*/

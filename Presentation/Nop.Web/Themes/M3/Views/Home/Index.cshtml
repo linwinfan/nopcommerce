@@ -1,0 +1,146 @@
+﻿@{
+    Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css" />
+<script type="text/javascript" src="/Areas/Shop/Themes/M3/Content/scripts/jquery.soChange-min.js"></script>
+<link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" />
+@if (Maticsoft.Web.MvcApplication.HasArea(Maticsoft.Web.AreaRoute.MShop))
+{
+    <script type="text/javascript">
+        try {
+            if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i))) {
+                location.replace('/m');
+            }
+        } catch (e) { }
+    </script>
+}
+<!--banner焦点图脚本结束-->
+<div class="newBannerWrap">
+    <div class="new_banner">
+        <div class="rslides " style="height: 480px;">
+            @Html.Action("AdDetail", "Partial", new { id = 66, ViewName = "_Ad_Banner" })
+        </div>
+        <ul class="rslides_tabs ">
+            @Html.Action("AdDetail", "Partial", new { id = 66, ViewName = "_Ad_Banner_Cons" })
+        </ul>
+    </div>
+</div>
+<!--banner焦点图结束-->
+<!--smSlider结束-->
+<!--flashSale限时抢购开始-->
+@Html.Action("CountDown", "ProSales", new { viewName = "_CountDownIndex" })
+<!--flashSale限时抢购结束-->
+<!--brandRecommendation品牌推荐开始-->
+@Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.Cheap, Top = 5, ViewName = "_ProductIndexCheap" })
+<!--brandRecommendation品牌推荐结束-->
+<!--womenWearWrap精品女装开始-->
+<div class="womenWearWrap">
+    <div class="womenWearTile">
+        精品女装</div>
+    <div class="womenWearCont">
+        <div class="womenWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 77, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 2, Top = 10, ViewName = "_IndexCate" })
+        </div>
+        @Html.Action("ProductList", new { Cid = 2, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 2, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--womenWearWrap精品女装结束-->
+<!--menWearWrap精品男装开始-->
+<div class="menWearWrap">
+    <div class="menWearTile">
+        精品男装</div>
+    <div class="menWearCont">
+        <div class="menWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 78, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 31, Top = 10, ViewName = "_IndexCate" })
+        </div>
+        @Html.Action("ProductList", new { Cid = 31, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 31, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--menWearWrap精品男装结束-->
+<!--广告位1开始-->
+@Html.Action("AdDetail", "Partial", new { id = 67, ViewName = "_Index_Center_Ad" })
+<!--广告位1结束-->
+<!--underWearWrap精品内衣开始-->
+<div class="underWearWrap">
+    <div class="underWearTile">
+        精品内衣</div>
+    <div class="underWearCont">
+        <div class="womenWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 79, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 49, Top = 10, ViewName = "_IndexCate" })</div>
+        @Html.Action("ProductList", new { Cid = 49, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 49, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--underWearWrap精品内衣结束-->
+<!--childSaleWrap母婴特卖开始-->
+<div class="childSaleWrap">
+    <div class="childSaleTile">
+        童装特卖</div>
+    <div class="childSalerCont">
+        <div class="womenWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 80, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 61, Top = 10, ViewName = "_IndexCate" })</div>
+        @Html.Action("ProductList", new { Cid = 61, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 61, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--childSaleWrap母婴特卖结束-->
+<!--广告位2开始-->
+@Html.Action("AdDetail", "Partial", new { id = 68, ViewName = "_Index_Center_Ad" })
+<!--广告位2结束-->
+<!--sportsOutdoorsWrap运动户外开始-->
+<div class="sportsOutdoorsWrap">
+    <div class="sportsOutdoorsTile">
+        精品美妆</div>
+    <div class="sportsOutdoorsCont">
+        <div class="womenWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 81, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 72, Top = 10, ViewName = "_IndexCate" })</div>
+        @Html.Action("ProductList", new { Cid = 72, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 72, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--sportsOutdoorsWrap运动户外结束-->
+<!--shoesBagsWrap鞋靴箱包开始-->
+<div class="shoesBagsWrap">
+    <div class="shoesBagsTile">
+        靴鞋箱包</div>
+    <div class="shoesBagsCont">
+        <div class="womenWearCont1">
+            @Html.Action("AdDetail", "Partial", new { id = 82, ViewName = "_Index_Cate_Ad" })
+            @Html.Action("CategoryList", "Partial", new { Cid = 80, Top = 10, ViewName = "_IndexCate" })</div>
+        @Html.Action("ProductList", new { Cid = 80, Top = 8 })
+        @Html.Action("BrandList", "Product", new { Cid = 80, Top = 9, viewName = "_CateBrand" })
+    </div>
+</div>
+<!--shoesBagsWrap鞋靴箱包结束-->
+<!--广告位3开始-->
+@Html.Action("AdDetail", "Partial", new { id = 69, ViewName = "_Index_Center_Ad" })
+<!--广告位3结束-->
+<!--communityWrap动软社区开始-->
+<div class="communityWrap">
+    <div class="communityTile">
+        精品店铺</div>
+    <div class="communityCont" style="padding-left: 8px;">
+        @Html.Action("RecStore", "Partial", new { top = 7 })
+    </div>
+</div>
+<div class="communityWrap">
+    <div class="communityTile">
+        动软社区</div>
+    <div class="communityCont">
+        @Html.Action("PhotoPart", "Partial", new { top = 3, area = "SNS", viewName = "_ShopIndexPhotoPart" })
+        @Html.Action("HotComments")
+    </div>
+</div>
+<!--communityWrap动软社区结束-->
+<script type="text/javascript">
+    $(function () {
+        $(".all-goods a").css("background", "none");
+    });
+</script>

@@ -1,0 +1,16 @@
+﻿ 
+    <!--商品分类开始-->
+<div id="nav" >
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+ 

@@ -1,0 +1,45 @@
+﻿@model Maticsoft.Model.Shop.Activity.ActivityInfo    
+           @if (Model != null)
+           {
+               <li  class="pGift">
+                 @if (Model.RuleId == 1)
+                 {
+                     <span style="color:#C00;">首单</span>
+                  }  
+                   @if (Model.BuyProductId.HasValue && Model.BuyProductId.Value > 0)
+                   {
+                       <span>购买&#12288;<a style="display: inline;color: #666;" href="@(ViewBag.BasePath)Product/Detail/@Model.BuyProductId.Value"  target="_blank">@Model.BuyProductName</a>&#12288;<span class="red">@(Model.BuyCount > 0 ? ("满" + Model.BuyCount + "件") : "")</span>
+                       </span> 
+                   }
+                   else if (Model.BuyCategoryId > 0)
+                   {
+                       <span>购买&#12288;分类<a style="display: inline;color: #666;" href="@(ViewBag.BasePath)product/@Model.BuyCategoryId"  target="_blank">@Model.BuyCategoryName</a>中的商品&#12288;<span class="red">@(Model.BuyCount > 0 ? ("满" + Model.BuyCount + "件") : "")</span>
+                       </span> 
+                   }  
+                   <span class="red">
+                       @if (Model.LimitPrice > 0 || Model.LimitMaxPrice.HasValue)
+                       {
+                           @:消费金额范围 @(Model.LimitPrice > 0 ? Model.LimitPrice.ToString("F") : "无限制")-@(Model.LimitMaxPrice.HasValue ? Model.LimitMaxPrice.Value.ToString("F") : "无限制")
+                       }
+                   </span>
+                   @switch (Model.RuleId)
+                   {
+                       case 1:
+                       case 2:
+                           @:送 <a style="display: inline;color: #666;"  href="@(ViewBag.BasePath)Product/Detail/@Model.ProductId"  target="_blank">@Model.ProductName</a>  
+                           break;
+                       case 3:
+                           @:送 <a style="display: inline;color: #3C3939;" href="javascript:;"  target="_blank">@Model.CpRuleName</a>
+                           break;
+                       case 4:
+                           <a style="display: inline;color: #3C3939;" href="javascript:;"  >免邮</a> 
+                           break;
+                       default:
+                           break;
+                   }
+                     
+               </li>
+            
+
+                    }    
+     

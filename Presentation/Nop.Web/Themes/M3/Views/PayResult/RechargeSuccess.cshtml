@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+}
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/pay.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+<div class="contentWrap">
+    <!--商品分类开始-->
+<div id="nav">
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+</div>
+<div class="order-wrapper">
+    <div class="successk">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-bottom: 1px dashed #efd9af;">
+            <tbody>
+                <tr>
+                    <td width="10%" rowspan="5" align="center">
+                        <img src="/Areas/Shop/Themes/M3/Content/images/chenggong.jpg" width="48" height="80">
+                    </td>
+                    <td height="45" colspan="3" align="left">
+                        <span style="font-family: '微软雅黑','黑体'; font-size: 18px; font-weight: bold; color: #C00;">
+                            您已成功支付，请注意查看您的账户余额。</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="35" colspan="3" align="left">
+                        充值号：@(ViewBag.RechargeId)
+                    </td>
+                </tr>
+                <tr>
+                    <td height="35" colspan="3" align="left">
+                        充值金额：@(ViewBag.RechargeBlance.ToString("F"))
+                    </td>
+                </tr>
+                <tr>
+                    <td width="65%" height="60" align="left" valign="middle">
+                        <span class="fenzi"></span><a href="@(ViewBag.BasePath)UserCenter/Balance">查看您的余额</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<input type="hidden" value="@ViewBag.RechargeId" id="RechargeId"/>
+<script type="text/javascript">
+    $(function () {
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+    });
+</script>

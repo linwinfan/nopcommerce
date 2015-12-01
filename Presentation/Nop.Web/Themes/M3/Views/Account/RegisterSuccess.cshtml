@@ -1,0 +1,144 @@
+﻿ @{
+     Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+ }
+
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSend").click(function () {
+            $.ajax({
+                url: $Maticsoft.BasePath + "Account/SendEmail",
+                type: 'post', dataType: 'text', timeout: 10000,
+                data: { Action: "post", Email: '@ViewBag.Email', Type: 0 },
+                success: function (resultData) {
+                    if (resultData == "success") {
+                        ShowSuccessTip("重新发送邮件成功！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    ShowFailTip("发送邮件失败：" + errorThrown);
+                }
+            });
+        });
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+    });
+</script>
+
+<div class="contentWrap">
+    <!--商品分类开始-->
+<div id="nav">
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+</div>
+
+<div class="w760" style="width: 1200px;margin: 0 auto;overflow: hidden;">
+        <div class="box box-pwd">
+            <div class="hd">
+                <h2>
+                    注册成功</h2>
+            </div>
+            <div class="bd" style="border:0px;">
+                <div id="tab_regi">
+                    <div class="J_tab_panel">
+                     <div class="login_k">
+      	<div class="xxts ">
+            <span style="font-size: 16px; color: #999;font-family: '微软雅黑';line-height: 30px;">已成功发送邮件，请登录邮箱进行处理</span>
+            <p style="font-family: '微软雅黑';line-height: 30px;">我们已将注册验证邮件发送到您的邮箱 @ViewBag.Email，请点击邮件中的“激活帐号链接”来完成帐号激活。</p>
+            <div>
+                
+                <p><a href="@ViewBag.EmailUrl" ><img src="/Areas/Shop/Themes/M3/Content/images/dlyx.gif" width="100" height="50" /></a></p>
+                <p class="l" style="font-family: '微软雅黑';line-height: 30px;">没收到激活帐号邮件？请稍等……<br />
+                      若仍未收到激活帐号邮件，请<a  href="javascript:void(0)" id="btnSend" style="color: red;">点击这里</a>重新发送</p>
+                <span class="cl2"></span>
+            </div>
+        </div><br class="cl" />
+    </div>
+
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".copyright").css("text-align", "center");
+
+        var acvar = 'special';
+        if (acvar != 'index') {
+            $('.mallleft').hover(function () {
+                $('.j-menu').show();
+            }, function () {
+                $('.j-menu').hide();
+            });
+        }
+    });
+    $(function () {
+        $('.ads_pictures>div').soChange({
+            thumbObj: '.small_icons li',
+            thumbNowClass: 'curr', //自定义导航对象当前class为curr
+            changeTime: 5000//自定义切换时间为4000ms
+        });
+
+        $('.small_icons').hover(function () {
+            clearInterval(timer);
+        });
+
+    });
+    $(function () {
+        $('.my-mro').hover(function () {
+            $('.my-mropopup').stop(true, true).fadeIn();
+        }, function () {
+            $('.my-mropopup').stop(true, true).fadeOut();
+        });
+    });
+    $(function () {
+        $('.j-menu .items:even').addClass('backff');
+        $('.j-menu .items:odd').addClass('backe6');
+    });
+
+
+    $(function () {
+        $('.j-menu .items').hover(function () {
+
+
+            $(this).find('.items-content').css({ height: $(this).find('.items-content').height() });
+
+            $('.j-menu .items:even').addClass('backff');
+            $('.j-menu .items:odd').addClass('backe6');
+            $(this).addClass('back82').siblings().removeClass('back82');
+
+            $(this).find('.items-content li').last().css({ border: 'none' });
+
+            $('.j-menu .items .items-content').hide();
+            $(this).find('.items-content').show();
+
+        }, function () {
+            $('.j-menu .items').find('.items-content').hide();
+            $('.j-menu .items').removeClass('back82')
+        });
+
+        var acvar = 'special';
+        if (acvar != 'index') {
+            $("#cate").hide();
+        } else {
+            $("#cate").show();
+        }
+    });
+</script>

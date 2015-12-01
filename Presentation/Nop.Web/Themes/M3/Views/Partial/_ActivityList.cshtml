@@ -1,0 +1,51 @@
+﻿ @model  Maticsoft.ViewModel.Shop.ActivityModel 
+ @if (Model != null)
+ {
+     if ((Model.Full != null && Model.Full.Count > 0) || (Model.First != null && Model.First.Count > 0) || (Model.Coupon != null && Model.Coupon.Count > 0)
+         || (Model.FreeShipping != null && Model.FreeShipping.Count > 0))
+     {
+            <div class="box-sub">
+
+     <div class="hd">
+                    <h2>
+                        促销活动</h2>
+                </div>
+     <div class="bd">
+         <ul class="promotionList">
+     @if (Model.First != null && Model.First.Count > 0)
+      {
+          foreach (Maticsoft.Model.Shop.Activity.ActivityInfo item in Model.First)
+          {
+             @Html.Partial("_ActivityListSub", item)
+          }
+      }
+          @if (Model.Full != null && Model.Full.Count > 0)
+          {
+              foreach (Maticsoft.Model.Shop.Activity.ActivityInfo item in Model.Full)
+              {     
+                  @Html.Partial("_ActivityListSub", item)
+              }
+          }   
+       @if (Model.Coupon != null && Model.Coupon.Count > 0)
+       {
+           foreach (Maticsoft.Model.Shop.Activity.ActivityInfo item in Model.Coupon)
+           {
+             @Html.Partial("_ActivityListSub", item)
+           }
+       }
+     @if (Model.FreeShipping != null && Model.FreeShipping.Count > 0)
+     {
+         foreach (Maticsoft.Model.Shop.Activity.ActivityInfo item in Model.FreeShipping)
+         {
+             @Html.Partial("_ActivityListSub", item)
+         }
+     }
+         </ul>
+     </div>
+              </div>
+ 
+     }
+
+
+
+ }

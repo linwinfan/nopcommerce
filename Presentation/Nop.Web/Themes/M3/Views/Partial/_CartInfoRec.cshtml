@@ -1,0 +1,30 @@
+﻿@model List<Maticsoft.Model.Shop.Products.ProductInfo> 
+
+<div class="listMainContWrap" style="width: 990px;">
+    <!--商品精选开始-->
+    <div class="productsSelected">
+        <div class="productsSelectedTitle">
+            商品精选</div>
+        <ul class="productsSelectedList">
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                <li>
+                    <div class="p-img">
+                        <a href="@item.SeoUrl">
+                                                 <img width="160" height="160" alt="@item.ProductName" 
+                                 src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailUrl1, "T158X158_")"></a>
+                    </div>
+                    <div class="p-name">
+                        <a href="@item.SeoUrl">@item.ProductName</a>
+                    </div>
+                    <div class="p-price">
+                       ￥@item.LowestSalePrice.ToString("F")</div>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+    <!--商品精选结束-->
+</div>

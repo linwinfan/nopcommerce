@@ -1,0 +1,92 @@
+﻿ <script type="text/javascript">
+     $(function () {
+         $('#search_key').keyup(function (event) {
+             if (event.keyCode == '13') {
+                 event.preventDefault();
+                 $('#NavBtnSearch').click();
+             }
+         });
+         $("#NavBtnSearch").click(function () {
+             var keyword = $("#search_key").val();
+             if (keyword == "") {
+                 ShowFailTip('请输入关键字！');
+                 return;
+             }
+             location.href = $Maticsoft.BasePath+"search/0/0/default/0-0/" + keyword;
+         });
+
+         $(".search-btn").click(function () {
+             var bottomKeyword = $("#bottomKeyword").val();
+             if (!bottomKeyword || bottomKeyword == "") {
+                 ShowFailTip('请输入关键字！');
+                 return;
+             }
+             location.href = $Maticsoft.BasePath+"search/0/0/default/0-0/" + bottomKeyword;
+         });
+     });
+
+ </script>
+
+
+
+<!--siteNavWrap开始-->
+	<div class="siteNavWrap">
+        <div class="siteNav">
+            <ul class="quickMenu">
+                <li  class="loginLayer" style="float: left;">
+                </li>
+                
+                <li id="myShop" onmouseover="show('block')" onmouseout="show('none')"><a href="@(ViewBag.Basepath)UserCenter">我的商城</a><i class="icon3"><img src="/Areas/Shop/Themes/M3/Content/images/arrow.png" /></i>
+                	<ul id="ulshopconceal">
+                        <li><a rel="nofollow" href="@(ViewBag.Basepath)UserCenter/Orders">我的订单</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/MyFavor">我的收藏</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/PointsDetail">我的积分</a></li>
+                        <li><a href="@(ViewBag.Basepath)SNS">我的社区</a></li>
+                	</ul>
+           		</li>
+                <li class="phone">
+                	<i class="icon4"><img src="/Areas/Shop/Themes/M3/Content/images/APP.png" /></i>
+                    <a href="@(ViewBag.BasePath)Download/Android">APP下载</a>
+                </li>
+            </ul>
+      </div>
+	</div>
+<!--siteNavWrap结束-->
+<!--header开始-->
+    <div id="header">
+    	<h1><a href="/"><img src="@ViewBag.Logo" /></a></h1>
+      <ul class="provice">
+            @*<li class="provinceNow">北京</li>
+            <li class="province01">
+            	<span class="regionName"><a href="#">切换省份</a></span>
+                <span>
+                <img src="images/arrow.png">
+                </span>
+            </li>*@
+        </ul>
+      <div class="searchWrap">
+          <div class="search">
+              <div class="text">
+                  <input id="search_key" class="txt" type="text" placeholder="请输入你要找的商品或品牌"/>
+              </div> 
+              <div class="searchR" id="NavBtnSearch"><a href="javascript:;" >搜 索</a></div>  
+          </div>
+          @Html.Action("HotKeyword", new { Cid = 0, Top = 12 })
+            
+        </div>
+        <div class="shoppingCartWrap">
+        	<a href="@(ViewBag.Basepath)ShoppingCart/CartInfo" class="cartTitle">购物车</a>
+            <a id="shoppingCartNum" href="javascript:;" class="numb">
+                <span id="hd-cart-amount" class="h fb">0</span>
+            </a>
+        </div>
+    </div>
+<!--header结束-->
+<script type="text/javascript">
+    $('.loginLayer').load($Maticsoft.BasePath + 'Partial/Login?timespan=' + new Date().format('yyyyMMddhhmmssS'));
+    $('#hd-cart-amount').load($Maticsoft.BasePath + 'ShoppingCart/GetCartCount?timespan=' + new Date().format('yyyyMMddhhmmssS')); //Date.parse(new Date())
+    function show(mode) {
+        document.getElementById('ulshopconceal').style.display = mode;
+    }
+
+</script>

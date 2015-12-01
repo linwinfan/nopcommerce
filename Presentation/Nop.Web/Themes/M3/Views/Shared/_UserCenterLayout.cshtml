@@ -1,0 +1,46 @@
+﻿@using System.Web.Mvc.Html
+@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+@*网站前台模版*@
+}
+@section head{
+    @RenderSection("head", false)
+    <link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/search.css" type="text/css" />
+    <link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+}
+<style type="text/css">
+.icon1,.icon2,.icon3,.icon4{ top:0px!important;}
+</style>
+    @Html.Action("Header", "Partial", new { area = "Shop" })
+    @Html.Action("Navigation", "Partial", new { area = "Shop", Theme = "M3" })
+      <div class="contentWrap">
+ @Html.Partial("/Areas/Shop/Themes/M3/Views/Partial/_CateAll.cshtml")
+ </div>
+<div class="personalCenterContWrap">
+    	<div class="personalCenterCont">
+        	<div class="personalCenterContTitle">
+                <a href="javascript:;" >我的商城</a>
+            </div>
+	        <!--personalCenterContL开始-->
+  @Html.Action("LeftMenu", "UserCenter", new { area = "Shop" })
+  <div class="personalCenterContR">
+    @RenderBody()
+    </div>
+    </div></div>
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+
+<script type="text/javascript">
+    $(function() {
+        $("a[tab='" + $("#currentpage").val() + "']").css("color", "#c2151f");
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+    });
+</script>
+
+ 

@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_ShoppingLayout.cshtml";
+}
+
+<script type="text/javascript">
+    $(function () {
+
+        $(".decrement").die("click").live("click", function () {
+            var count = parseInt($(this).next().val());
+            if (count == 1) {
+                if (confirm("您确定要删除该商品吗？")) {
+                    $(".btnDelete[ItemId='" + $(this).attr("ItemId") + "']").click();
+                    // $(this).parents('.gouwuchelist').find('.btnDelete').click();
+                }
+            } else {
+                $(this).next().val(count - 1);
+                var itemId = $(this).parent().attr("ItemId");
+                $.ajax({
+                    type: "POST",
+                    dataType: "text",
+                    async: false,
+                    url: "@(ViewBag.BasePath)ShoppingCart/UpdateItemCount?s=" + new Date().format('yyyyMMddhhmmssS'),
+                    data: { ItemId: itemId, Count: count - 1 },
+                    success: function (data) {
+                        if (data != "No") {
+                            $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                        } else {
+                            ShowFailTip("服务器繁忙，请稍候再试！");
+                        }
+                    }
+                });
+            }
+        });
+        $('.txtQuantity').die("blur").live("blur", function () {
+            var count = parseInt($(this).val());
+            if (count < 1) {
+                if (confirm("您确定要删除该商品吗？")) {
+                    $(".btnDelete[ItemId='" + $(this).attr("ItemId") + "']").click();
+                    return;
+                }
+                $(this).val(1);
+                return;
+            }
+            var itemId = $(this).attr("ItemId");
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "@(ViewBag.BasePath)ShoppingCart/UpdateItemCount?s=" + new Date().format('yyyyMMddhhmmssS'),
+                data: { ItemId: itemId, Count: count },
+                success: function (data) {
+                    if (data != "No") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                    }
+                }
+            });
+        });
+        $(".increment").die("click").live("click", function () {
+            var count = parseInt($(this).prev().val());
+            $(this).prev().val(count + 1);
+            var itemId = $(this).attr("ItemId");
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                async: false,
+                url: "@(ViewBag.BasePath)ShoppingCart/UpdateItemCount?s=" + new Date().format('yyyyMMddhhmmssS'),
+                data: { ItemId: itemId, Count: count + 1 },
+                success: function (data) {
+                    if (data != "No") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                    }
+                }
+            });
+        });
+
+    })
+</script>
+
+<div class="dengluWrap" style="display: none">现在<a href="@(ViewBag.BasePath)Account/Login">[登录]</a>，您购物车中的商品将被永久保存。</div>
+
+<div class="cart-inner">
+    
+    <!--item开始-->  
+    <div id="LoadCartList">
+      @Html.Action("CartList", "ShoppingCart")
+         </div>
+    <!--item结束-->
+
+</div>
+
+                    @Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.Recommend, Cid = 0, Top = 4, ViewName = "_CartInfoRec" })

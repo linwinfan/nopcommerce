@@ -1,0 +1,27 @@
+﻿@model List<Maticsoft.Model.Settings.MainMenus>
+<!--navWrap开始-->
+<script type="text/javascript">
+    $(function() {
+        $(".nav a:last").css("border-right", "none");
+    });
+</script>
+<div class="navWrap">
+    <ul class="nav">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                if (item.URLType == 4)
+                {
+            <li cid="@item.NavURL"><a @(item.Target == 1 ? "target='_blank'" : "") href="@(ViewBag.BasePath)product/@item.NavURL">@item.MenuName</a></li>
+                }
+                else
+                {
+            <li><a    href="@item.NavURL"  @(item.Target == 1 ? "target='_blank'" : "")>@item.MenuName</a></li>
+                }
+            }
+        }
+    </ul>
+</div>
+
+<!--navWrap结束-->

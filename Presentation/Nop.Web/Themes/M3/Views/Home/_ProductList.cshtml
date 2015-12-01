@@ -1,0 +1,31 @@
+﻿@using Maticsoft.Web.SMSService
+@model List<Maticsoft.Model.Shop.Products.ProductInfo>
+@if (Model != null && Model.Count > 0)
+{
+
+    for (int i = 0; i < (Model.Count + 1) / 2; i++)
+    {
+    <ul class="womenWearCont@(i + 2)">
+        <li class="liTop"><a href="@Model[i * 2].SeoUrl">
+            <img width="199" height="260" title="@Model[i * 2].ProductName" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(Model[i * 2].ThumbnailUrl1, "T199X260_")" /></a>
+            <div class="price">
+                <strong>@Model[i * 2].LowestSalePrice.ToString("C")</strong> <del>@(Model[i * 2].MarketPrice.HasValue ? Model[i * 2].MarketPrice.Value.ToString("C") : "")</del>
+            </div>
+        </li>
+        @if (i * 2 + 1 < Model.Count)
+        {
+            <li class="liTop"><a href="@Model[i * 2 + 1].SeoUrl">
+                <img width="199" height="157" title="@Model[i * 2 + 1].ProductName" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(Model[i * 2 + 1].ThumbnailUrl1, "T199X157_")" /></a>
+                <div class="price">
+                    <strong>@Model[i * 2 + 1].LowestSalePrice.ToString("C")</strong> <del>@(Model[i * 2 + 1].MarketPrice.HasValue ? Model[i * 2 + 1].MarketPrice.Value.ToString("C") : "")</del>
+                </div>
+            </li>
+        }
+    </ul>
+    }
+
+
+
+
+
+}

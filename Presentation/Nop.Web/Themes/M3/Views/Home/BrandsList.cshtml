@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "品牌库-动软卓越";
+    Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+}
+
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+<style type="text/css">
+.icon1,.icon2,.icon3,.icon4{ top:0px!important;}
+</style>
+
+ 
+<div class="aw m0u clearfix" style="position: relative;width: 1200px;margin: 0 auto;margin-top: 10px;">
+    <div class="location" style="margin: 10px auto;">您当前所在的位置：<a href="@ViewBag.BasePath">首页</a> &gt; 合作品牌</div>
+
+    @Html.Action("Brands", "Home", new { productTypeId = 2, viewName = "_BrandsList" })
+
+    @Html.Action("Brands", "Home", new { productTypeId = 3, viewName = "_BrandsList" })
+
+    @Html.Action("Brands", "Home", new { productTypeId = 84, viewName = "_BrandsList" })
+
+    @Html.Action("Brands", "Home", new { productTypeId = 85, viewName = "_BrandsList" })
+
+    @Html.Action("Brands", "Home", new { productTypeId = 6, viewName = "_BrandsList" })
+   
+</div>
+<script type="text/javascript">
+    $(function() {
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+    });
+</script>
+
+
+        

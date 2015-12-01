@@ -1,0 +1,26 @@
+﻿@model List<Maticsoft.Model.Shop.Products.ProductInfo> 
+<div class="recommendWrap">
+    <span class="icon"></span>
+    <ul class="recommendList">
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+            <li class="item">
+                <p class="pic">
+                    <a href="@item.SeoUrl" title="@item.ProductName" target="_blank">
+                        <img width="130" height="130"  alt="@item.ProductName" 
+                             src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailUrl1, "T128X130_")" >
+                    </a>
+                </p>
+                <p class="name">
+                    <a href="@item.SeoUrl">@item.ProductName</a></p>
+                <p class="price">
+                    <a href="@item.SeoUrl">￥@item.LowestSalePrice.ToString("F")</a></p>
+                <p class="btn">
+                    <a href="@item.SeoUrl">立即抢购</a></p>
+            </li>
+            }
+        }
+    </ul>
+</div>

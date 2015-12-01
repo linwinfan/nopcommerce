@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_StoreSiteLayout.cshtml";
+@*商家申请环节模版*@
+}
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+@section headtop{
+    <link href="/Areas/Shop/Themes/M3/Content/styles/base.css" rel="stylesheet" type="text/css" />
+}
+@section head{
+    <link href="/Areas/Shop/Themes/M3/Content/styles/shopc2.css" rel="stylesheet" type="text/css" />
+    @RenderSection("head", false)
+}
+@Html.Action("Header", "Partial", new { area = "Shop",viewName="_StoreHeader" })
+<div id="headers" class="shopping">
+    <div id="shd2">
+        <div class="wrap clearfix">
+            @Html.Action("Header", "Partial", new { area = "Shop", ViewName = "_HeaderShopping" })
+            @RenderSection("step", false)
+        </div>
+    </div>
+</div>
+@RenderBody()
+@Html.Action("Footer", "Partial", new { area = "Shop" })
+@section foot{
+    @RenderSection("foot", false)
+}

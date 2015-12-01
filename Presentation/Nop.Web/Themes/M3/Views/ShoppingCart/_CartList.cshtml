@@ -1,0 +1,227 @@
+﻿@model Maticsoft.ViewModel.Shop.ShoppingCartModel
+<script type="text/javascript">
+    $(function () {
+        //var selectItem = new Array();
+        $(".SalePrice").each(function () {//优惠信息
+            var sellprice = $(this).attr("toalSellPrice");
+            var adjustedprice = $(this).attr('toalAdjustedPrice');
+            var p = parseFloat(sellprice) - parseFloat(adjustedprice);
+            if (p > 0) {
+                  $(this).text(p.toFixed(2));
+                $(this).parent().show();
+            }
+        });
+
+        $("#btnRemoveAll").click(function () {//清空购物车
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "@(ViewBag.BasePath)ShoppingCart/ClearShopCart",
+                data: {},
+                success: function (data) {
+                    if (data != "No") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                        setTimeout(function () { $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS')); }, 3000);
+                    }
+                }
+            });
+        });
+        $(".checkAll").click(function () {//全选
+            $(".checkbox").prop('checked', $(this).prop('checked'));
+        });
+
+//        $(".btnCheck").click(function () {
+//            var itemId = $(this).attr("ItemId");
+//            //判断选中数组中是否已存在该项
+//            // jQuery.inArray
+//            var index = $.inArray(itemId, selectItem);
+//            if (index > -1) {
+//                selectItem.splice(index, 1);
+//            } else {
+//                selectItem.push(itemId);
+//            }
+//        });
+        $("#btnRemoveSelect").click(function () {//批量删除
+            var selectItem = new Array();
+            var itemId;
+            //填充数组
+            $(".checkbox").each(function () {
+            if ($(this).prop('checked')) {
+                itemId = $(this).attr("ItemId");
+                //判断选中数组中是否已存在该项
+                var index = $.inArray(itemId, selectItem);
+                if (index < 0) {
+                    selectItem.push(itemId);
+                }   
+            }
+            });
+        var itemIds = selectItem.join(",");
+            if (itemIds.length < 1) {
+                ShowFailTip("请选择需要移除的商品！");
+                return;
+            }
+           
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "@(ViewBag.BasePath)ShoppingCart/RemoveItem",
+                data: { ItemIds: itemIds },
+                success: function (data) {
+                    if (data != "No") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                        setTimeout(function () { $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS')); }, 3000);
+                    }
+                }
+            });
+        });
+        $(".btnDelete").click(function () {//单个删除
+            var itemId = $(this).attr("ItemId");
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "@(ViewBag.BasePath)ShoppingCart/RemoveItem",
+                data: { ItemIds: itemId },
+                success: function (data) {
+                    if (data != "No") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                        setTimeout(function () { $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS')); }, 3000);
+                    }
+                }
+            });
+        });
+        $(".checkbox").click(function () {//单选
+            var itemId = $(this).attr("ItemId");
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: "@(ViewBag.BasePath)ShoppingCart/SelectedItem",
+                data: { id: itemId },
+                success: function (data) {
+                    if (data == "OK") {
+                        $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS'));
+                    } else {
+                        ShowFailTip("服务器繁忙，请稍候再试！");
+                        setTimeout(function () { $("#LoadCartList").load("@(ViewBag.BasePath)ShoppingCart/CartList?s=" + new Date().format('yyyyMMddhhmmssS')); }, 3000);
+                    }
+                }
+            });
+        });
+        if (parseInt($('#SelectedQuantity').attr('Quantity')) < 1) {
+            $('#toSettlement').css('cursor', ' not-allowed');
+            $('#toSettlement').click(function () {
+                return false;
+            });
+        }
+    })
+</script>
+@if (Model != null && Model.AllCartInfo.Quantity > 0)
+{
+    <div class="cart-thead clearfix">
+        <div class="column t-checkbox form">
+            <span><a href="javascript:;" id="btnRemoveAll" style="color:#1859a5">清空购物车</a></span>
+
+        </div>
+        <div class="column t-goods">
+            商品名称</div>
+        <div class="column t-price">
+            单价</div>
+        <div class="column t-promotion">
+            数量</div>
+        <div class="column t-quantity">
+            小计</div>
+        <div class="column t-action">
+            操作</div>
+    </div> 
+    
+    <div id="product-list" class="cart-tbody">
+        @foreach (var item in Model.AllCartInfo.Items)
+        {
+            <div class="item item_selected ">
+                <div class="item_form clearfix">
+                    <div class="cell p-checkbox">
+                        <input @(item.Selected ? "checked='checked'" : "") class="checkbox" type="checkbox" ItemId="@item.ItemId"  value=""></div>
+                    <div class="cell p-goods">
+                        <div class="p-img">
+                            <a href="@(ViewBag.BasePath)Product/Detail/@item.ProductId">
+                                <img width="52" height="52" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailsUrl, "T115X115_")" alt="">
+                            </a>
+                        </div>
+                        <div class="pName">
+                            <a href="@(ViewBag.BasePath)Product/Detail/@item.ProductId">
+                                @item.Name
+                            </a><span class="promise411">
+                                @if (item.SkuValues != null && item.SkuValues.Length > 0)
+                                {
+
+                                    foreach (string val in item.SkuValues)
+                                    {
+                                    @(val+ " " )
+                                    }
+
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cell p-price">
+                        <span class="price">￥@item.AdjustedPrice.ToString("F")</span></div>
+                    <div class="cell p-quantity" for-stock="for-stock-1305547907">
+                        <div class="quantity-form" ItemId="@item.ItemId">
+                            <a href="javascript:;"  class="decrement " ItemId="@item.ItemId">-</a>
+                            <input maxlength="3"  ItemId="@item.ItemId" type="text" class="quantity-text txtQuantity" value="@item.Quantity">
+                            <a href="javascript:;" ItemId="@item.ItemId" class="increment">+</a>
+                        </div>
+                    </div>
+                    <div class="cell p-inventory">
+                        ￥@((item.AdjustedPrice * item.Quantity).ToString("F"))</div>
+                    <div class="cell p-remove">@*<a class="cart-collection" href="#">收藏</a>*@
+                    <a class="cart-remove btnDelete" href="javascript:;" ItemId="@item.ItemId">删除</a>
+                    </div>
+                </div>
+                <div class="item_extra">
+                    <div class="sku-yanBao newJdService clearfix">
+                    </div>
+                </div>
+            </div>
+        }
+        <!--item2结束-->
+    </div>  
+    <!--controlWrap开始-->
+    <div class="controlWrap">
+        <div class="control">
+            <div class="controlL">
+                <span class="allChoose">
+                    <input data-cart="toggle-cb" name="toggle-checkboxes" id="toggle-checkboxes_down"
+                        type="checkbox" checked="" value="" class="jdcheckbox checkAll">
+                    <label for="toggle-checkboxes_down">
+                        全选
+                    </label>
+                </span><span class="delete" id="btnRemoveSelect"><a href="javascript:;" >批量删除</a> </span><span class="shopping"><b></b>
+                    <a href="@(ViewBag.BasePath)Product">继续购物</a> </span>
+            </div>
+            <div class="controlR" id="SelectedQuantity" Quantity="@Model.SelectedCartInfo.Quantity">
+                应付金额（不含运费）：<span data-bind="@Model.SelectedCartInfo.TotalAdjustedPrice.ToString("F")">¥@Model.SelectedCartInfo.TotalAdjustedPrice.ToString("F")</span></div>
+        </div>
+        <div class="jiesuan">
+            <a href="@(ViewBag.BasePath)Order/SubmitOrder" id="toSettlement"></a>
+        </div>
+    </div>       
+    <!--controlWrap结束-->
+}
+else
+{
+    <div class="cart-inner cart-empty">
+        <div class="message">
+            <ul>
+                <li>购物车内暂时没有商品。</li>
+                <li>去<a href="@(ViewBag.BasePath)Product" >商品频道</a>挑选喜欢的商品</li>
+            </ul>
+        </div>
+    </div>
+}
+ 

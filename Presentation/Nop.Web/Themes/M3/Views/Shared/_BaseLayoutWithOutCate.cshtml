@@ -1,0 +1,23 @@
+﻿@using System.Web.Mvc.Html
+@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+@*网站前台模版*@
+}
+@section head{
+<style type="text/css">
+.icon1,.icon2,.icon3,.icon4{ top:0px!important;}
+</style>
+    @RenderSection("head", false)
+}
+
+    @Html.Action("Header", "Partial", new { area = "Shop" })
+    @Html.Action("Navigation", "Partial", new { area = "Shop", Theme = "M3" })
+    <div class="contentWrap">
+    @Html.Partial("/Areas/Shop/Themes/M3/Views/Partial/_CateAll.cshtml")
+     </div>
+    @RenderBody()
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+

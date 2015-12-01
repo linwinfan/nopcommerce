@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Areas/Shop//Themes/M3/Views/Shared/_UserCenterLayOut.cshtml";
+}
+@using Webdiyer.WebControls.Mvc
+@model PagedList<Maticsoft.Model.Shop.Commission.CommissionDetail>
+<link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/msg,btn,form,reg-base,reg.css?v=12022713" />
+<link href="/Areas/Shop/Themes/M3/Content/styles/UserCenterStyle.css" rel="stylesheet" type="text/css" />
+
+<div class="col-main">
+    <table  width="100%" border="0"   cellspacing="0" cellpadding="0">
+        <tr class="user_dingdantitle">
+            <td style="width: 600px">
+                我的推广佣金
+            </td>
+            <td>
+                获得的佣金:<span class="integral_a1">@ViewBag.AllFee.ToString("F")</span>
+            </td>
+        </tr> 
+    </table>
+     <input type="hidden" value="@(Maticsoft.Common.Globals.DomainFullName)" id="hiddomain"/>
+    <table width="100%" border="0" class="user_dingdan" cellspacing="0" cellpadding="0">
+        <tr>
+            <th>
+                获得日期
+            </th>
+            <th>
+                佣金规则
+            </th>
+            <th>
+                佣金
+            </th>
+            <th>
+                说明
+            </th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <tr align="center">
+                <td height="40" class="bor" style="padding: 0 0 0 0;">
+                    @item.TradeDate.ToString("yyyy-MM-dd")
+                </td>
+                <td class="bor">
+                    @item.RuleName
+                </td>
+                <td class="bor">
+                    @if (item.TradeType == 1)
+                    {
+                        <strong style="color: #ff8a00;">+@item.Fee.ToString("F")</strong>
+                 
+                    }
+                    else
+                    {
+                        <strong style="color: #33982e;">-@item.Fee.ToString("F")</strong>
+                    }
+                </td>
+                <td class="bor" style="text-align: left">
+                    @item.Remark  推广商品【<a href="@(ViewBag.BasePath)Product/Detail/@item.ProductId">@item.Name</a>】
+                </td>
+            </tr>
+            }
+        }
+    </table>
+    <center>
+        @Html.Pager(Model, new PagerOptions
+                                            {
+                                                PageIndexParameterName = "pageIndex",
+                                                NumericPagerItemCount = 10,
+                                                NumericPagerItemWrapperFormatString = "<p>{0}</p>",
+                                                NavigationPagerItemWrapperFormatString = "<p>{0}</p>",
+                                                CssClass = "in_pages",
+                                                SeparatorHtml = ""
+                                            })
+    </center>
+</div>

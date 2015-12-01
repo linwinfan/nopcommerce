@@ -1,0 +1,60 @@
+﻿@using Maticsoft.Web.SMSService
+@model Maticsoft.ViewModel.Shop.ProductListModel
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+<script src="/Areas/Shop/Themes/M3/Content/Scripts/timeCountDown.js" type="text/javascript"></script>
+
+ <script type="text/javascript">
+     $(function () {
+         $(".txtenddate").each(function () {
+             var endDate = $(this).attr("endDate");
+             var productId = $(this).attr("Product");
+             var myclass = new CountDown();
+             myclass.init({
+                 id: 'txtenddate_' + productId,
+                 //天数
+                 day_Dom: $("#dayEnd_" + productId),
+                 //小时
+                 hour_Dom: $("#hourEnd_" + productId),
+                 //分钟
+                 min_Dom: $("#minEnd_" + productId),
+                 //秒
+                 sec_Dom: $("#secEnd_" + productId),
+                 endTime: endDate
+             });
+         });
+     });
+ </script>
+<div class="flashSaleWrap">
+    <div class="flashSaleTile">
+        <div class="flashSaleTileL">
+            限时抢购</div>
+    </div>
+    <div class="flashSaleCont">
+        @if (null != Model &&null!=Model.ProductPagedList&&Model.ProductPagedList.Count > 0)
+        {
+            for (int i = 0; i < (Model.ProductPagedList.Count > 5 ? 5 : Model.ProductPagedList.Count); i++)
+            {
+            <dl class="dl@(i + 1)">
+                <dt><a href="@(ViewBag.BasePath)Product/ProSaleDetail/@Model.ProductPagedList[i].CountDownId">
+                    <img width="224" height="286" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(Model.ProductPagedList[i].ThumbnailUrl1, "T207x270_")" />
+                </a></dt>
+                <dd class="ddwhite" style="overflow: hidden;">
+                    <a href="@(ViewBag.BasePath)Product/ProSaleDetail/@Model.ProductPagedList[i].CountDownId">@Model.ProductPagedList[i].ProductName</a></dd>
+                <dd class="ddyellow">
+                    <a href="javascript:;">￥@Model.ProductPagedList[i].ProSalesPrice.ToString("F")</a></dd>
+                <a href="javascript:;" target="_blank" class="goodsnew_time">
+                   @* <span>倒计时：02小时30分38</span>*@
+                    <span class="txtenddate"  endDate="@((Model.ProductPagedList[i].ProSalesEndDate.ToUniversalTime() - Convert.ToDateTime("1970-01-01")).TotalMilliseconds.ToString("0"))"  Product="@Model.ProductPagedList[i].ProductId"  id="txtenddate_@(Model.ProductPagedList[i].ProductId)">
+                        倒计时：<em><em id="dayEnd_@(Model.ProductPagedList[i].ProductId)">0</em>天<em id="hourEnd_@(Model.ProductPagedList[i].ProductId)">0</em>时 
+                               <em id="minEnd_@(Model.ProductPagedList[i].ProductId)">0</em>分 <em id="secEnd_@(Model.ProductPagedList[i].ProductId)">0</em>秒</em>
+                    </span>
+                </a>
+            </dl>
+            }
+
+
+
+
+        }
+    </div>
+</div>

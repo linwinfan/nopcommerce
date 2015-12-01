@@ -1,0 +1,73 @@
+﻿@using System.Web.UI.WebControls
+<script type="text/javascript">
+    
+    function show(mode) {
+        document.getElementById('ulshopconceal').style.display = mode;
+    }
+    $(function () {
+        $('#search_key').keyup(function (event) {
+            if (event.keyCode == '13') {
+                event.preventDefault();
+                $('#NavBtnSearch').click();
+            }
+        });
+        $("#NavBtnSearch").click(function () {
+            var keyword = $("#search_key").val();
+            if (keyword == "") {
+                ShowFailTip('请输入关键字！');
+                return;
+            }
+            location.href = $Maticsoft.BasePath+"search/0/0/default/0-0/" + keyword;
+        });
+    });
+
+</script>
+
+
+
+<!--siteNavWrap开始-->
+	<div class="siteNavWrap" >
+        <div class="siteNav" style="width: 990px;">
+            <ul class="quickMenu">
+                <div  class="loginLayer" style="float: left;">
+                    <script type="text/javascript">
+                        $('.loginLayer').load('/Partial/Login');
+                        $('#shoppingCartNum').load($Maticsoft.BasePath + 'ShoppingCart/GetCartCount');
+                   </script>
+                </div>
+                <li id="myShop" onmouseover="show('block')" onmouseout="show('none')"><a href="@(ViewBag.Basepath)UserCenter">我的商城</a><i class="icon3"><img src="/Areas/Shop/Themes/M3/Content/images/arrow.png" /></i>
+                	<ul id="ulshopconceal">
+                        <li><a rel="nofollow" href="@(ViewBag.Basepath)UserCenter/Orders">我的订单</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/MyFavor">我的收藏</a></li>
+                        <li><a href="@(ViewBag.Basepath)UserCenter/PointsDetail">我的积分</a></li>
+                        <li><a href="@(ViewBag.Basepath)SNS">我的社区</a></li>
+                	</ul>
+           		</li>
+                <li class="phone">
+                	<i class="icon4"><img src="/Areas/Shop/Themes/M3/Content/images/APP.png" /></i>
+                    <a href="@(ViewBag.BasePath)Download/Android">APP下载</a>
+                </li>
+            </ul>
+      </div>
+	</div>
+<!--siteNavWrap结束-->
+<!--header开始-->
+    <div id="header" style="width:990px;">
+    	<h1><a href="@(ViewBag.BasePath)"><img src="@ViewBag.Logo" /></a></h1>
+<!--购物车导航开始-->        
+<div class="progress clearfix">
+    <ul class="progress-1">
+        <li class="step-1">1.我的购物车</li>
+        <li class="step-2">2.确认订单信息</li>
+        <li class="step-3">3.成功提交订单</li>
+    </ul>
+</div>
+<!--购物车导航结束-->
+    </div>
+<!--header结束-->
+<!--购物车开始-->
+
+<script type="text/javascript">
+    
+    $('#shoppingCartNum').load($Maticsoft.BasePath + 'ShoppingCart/GetCartCount');
+</script>

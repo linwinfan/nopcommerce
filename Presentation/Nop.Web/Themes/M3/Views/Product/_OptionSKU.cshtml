@@ -1,0 +1,69 @@
+﻿@model Maticsoft.ViewModel.Shop.ProductSKUModel
+@if (Model == null) { return; }
+@if (!ViewBag.HasStock && !ViewBag.HasSKU && Model.ListSKUInfos != null && Model.ListSKUInfos.Count == 1)
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#disableBuy").attr('disable', 'true');
+            $('#btnAddToCart').removeClass('addCart').addClass('addCart-gray');
+            $('#iteminfo #divBuyInfo').hide();
+            $('#iteminfo #closeArrivingNotifyMess').text("非常抱歉, 此商品已售罄!");
+            $('#iteminfo #closeArrivingNotifyMess').show();
+        });
+    </script>
+}
+@if (!ViewBag.HasSKU && Model.ListSKUInfos != null && Model.ListSKUInfos.Count == 1)
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#btnAddToCart').attr('itemid', '@Model.ListSKUInfos[0].SKU');
+        });
+    </script>
+}
+@if (Model.ListAttrSKUItems == null || Model.ListAttrSKUItems.Count < 1)
+{
+    return;
+}
+<div id="SKUOptions" style="overflow: hidden;">
+<input type="hidden" id="SKUDATA" value="@ViewBag.SKUJson"/>
+  
+    @foreach (KeyValuePair<Maticsoft.Model.Shop.Products.AttributeInfo, SortedSet<Maticsoft.Model.Shop.Products.SKUItem>>
+        attrSKUItem in Model.ListAttrSKUItems)
+    {
+
+        if (!string.IsNullOrWhiteSpace(attrSKUItem.Value.Min.ImageUrl))
+        {
+        
+            <div class="prdSizeWrap">
+                <div class="prdSizeTitle">@(attrSKUItem.Key.AttributeName + "：")</div>
+                <ul class="prdSize AttrItems">
+                    @foreach (Maticsoft.Model.Shop.Products.SKUItem skuItem in attrSKUItem.Value)
+                    {
+                        <li AttrId="@skuItem.ValueId" class="SkuItems" style="position: relative;padding: 2px;"><a  href="javascript:;" title="@skuItem.ValueStr" alt="@skuItem.ValueStr">
+                                                                            @if (!string.IsNullOrWhiteSpace(skuItem.ImageUrl))
+                                                                            {
+                                                                                <img width="25" height="25" class="vm" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(skuItem.ImageUrl, "T32x32_")" largeurl="@Maticsoft.Web.Components.FileHelper.GeThumbImage(skuItem.ImageUrl, "T300X390_")" alt="@skuItem.ValueStr" title="@skuItem.ValueStr" />
+                                                                            }
+                                                                        </a><span class="selected"></span> </li>
+                    }
+                </ul>
+            </div>
+    
+        }
+        else
+        {
+            <div class="prdSizeWrap">
+                <div class="prdSizeTitle">@(attrSKUItem.Key.AttributeName + "：")</div>
+                <ul class="prdSize AttrItems">
+                    @foreach (Maticsoft.Model.Shop.Products.SKUItem skuItem in attrSKUItem.Value)
+                    {
+                        <li attrId="@skuItem.ValueId" style="position: relative;" class="SkuItems"><a href="javascript:;" title="@skuItem.ValueStr" alt="@skuItem.ValueStr">@skuItem.ValueStr</a>
+                            <span class="selected"></span> </li>
+                    }
+                </ul>
+            </div>
+        
+    
+        }
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+}
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/pay.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+<div class="contentWrap">
+    <!--商品分类开始-->
+    <div id="nav">
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+</div>
+
+
+<div class="order-wrapper">
+    <div class="successk">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-bottom:1px dashed #efd9af;">
+            <tbody><tr>
+                       <td height="45" colspan="3" align="left">
+                           <span style=" font-family:&#39;微软雅黑&#39;,黑体; font-size:18px; font-weight: bold; color:#C00;"> 此订单只能在手机上支付 或 重新下单。</span>
+                       </td>
+                   </tr>
+                <tr>
+                    <td height="35" colspan="3" align="left"><h2>订单号：@ViewBag.OrderCode</h2></td>
+                </tr>
+                <tr>
+                    @*<td height="35" colspan="3" align="left"><strong><span class="ftx-01">@(ViewBag.ItemsCount)</span>件商品将发送给 @(ViewBag.ShipName)</strong></td>*@
+                </tr>
+                <tr>
+                    @*<td width="65%" height="60" align="left" valign="middle"><input type="button" border="none" name="" class="btn-conti" style="display: none;" value="继续支付"></td>*@
+                </tr>
+            </tbody></table>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+    });
+</script>

@@ -1,0 +1,32 @@
+﻿@model List<Maticsoft.Model.Shop.Products.CategoryInfo>
+@if (Model != null && Model.Count > 0)
+{
+
+
+        <ul class="category-list" id="js_climit_li">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <li class="appliance js_toggle relative first">
+                    <div class="category-info list-nz">
+                        <h3 class="category-name b-category-name">
+                            <img class="catebg" src="@Model[i].ImageUrl" width="40" height="40"/>
+                            <a id="s-category-289" href="@(ViewBag.BasePath)product/@Model[i].CategoryId" target="_blank" class="ml-22" title="@Model[i].Name">@Maticsoft.Common.StringPlus.SubString(Model[i].Name, 8, "...")</a>
+                        </h3>
+                        @Html.Action("CategoryList", "Partial", new { Cid = Model[i].CategoryId, Top = 2, viewName = "_IndexTop2SecondCate" })
+                    </div>
+                    <div class="menu-item menu-in top">
+                        <div class="area-in">
+                            <div class="area-bg">
+                                <div class="menu-srot">
+                                    @Html.Action("CategoryList", "Partial", new { Cid = Model[i].CategoryId, Top = 12, viewName = "_IndexSecondCate" })
+                                    @Html.Action("BrandList", "Product", new { Top = 7, Cid = Model[i].CategoryId, viewName = "_IndexBrand" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+
+   
+}

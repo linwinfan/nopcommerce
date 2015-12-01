@@ -1,0 +1,27 @@
+﻿@model List<Maticsoft.Model.Settings.Advertisement>
+@if (Model != null)
+{
+    <div class="ads_pictures">
+        @foreach (var item in Model)
+        {
+            <div class="goHref" style="background-image: url(@item.FileUrl);cursor: pointer;
+                                      height: 480px; width: 100%; display: none; background-position: 50% 0%; background-repeat: no-repeat;">
+                <a href="@item.NavigateUrl" target="_blank">&nbsp;</a></div>
+        }
+    </div>
+}
+<script type="text/javascript">
+    //广告轮播
+    $(function () {
+        $('.ads_pictures>div').soChange({
+            thumbObj: '.rslides_tabs li',
+            thumbNowClass: 'rslides_here', //自定义导航对象当前class为curr
+            changeTime: 5000//自定义切换时间为4000ms
+        });
+        $('.goHref').click(function () {
+            var href = $(this).children("a").attr("href");
+            window.open(href);
+        });
+    });
+</script>
+

@@ -1,0 +1,18 @@
+﻿@using System.Web.Mvc.Html
+@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+@*网站前台模版*@
+}
+@section head{
+    @RenderSection("head", false)
+}
+    @RenderBody()
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+<script type="text/javascript">
+    $(function() {
+        $("#body").css("background", "#f3f3f3");
+    });
+</script>

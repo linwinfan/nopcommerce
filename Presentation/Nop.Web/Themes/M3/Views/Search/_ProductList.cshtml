@@ -1,0 +1,98 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Maticsoft.ViewModel.Shop.ProductListModel
+@{
+    string cid = Request.RequestContext.RouteData.Values["cid"] != null ? Request.RequestContext.RouteData.Values["cid"].ToString() : "0";
+    string brandid = Request.RequestContext.RouteData.Values["brandid"] != null ? Request.RequestContext.RouteData.Values["brandid"].ToString() : "0";
+    string keyword = Request.RequestContext.RouteData.Values["keyword"] != null ? Request.RequestContext.RouteData.Values["keyword"].ToString() : "0";
+    string mod = Request.RequestContext.RouteData.Values["mod"] != null ? Request.RequestContext.RouteData.Values["mod"].ToString() : "default";
+    string price = Request.RequestContext.RouteData.Values["price"] != null ? Request.RequestContext.RouteData.Values["price"].ToString() : "0-0";
+
+}
+
+    <script type="text/javascript">
+        $(function () {
+           $.lazyFixedLoadImg('.pro_detail_left', 210, 275);
+            //保存显示价格
+         waterFall.init({
+                //Ajax请求参数
+                AjaxOptions: {
+                    //Ajax请求参数
+                    Params:@Html.Raw(ViewBag.DataParam),
+                    //Ajax请求URL
+                    DataURL: "@(ViewBag.BasePath)Search/ListWaterfall"
+                },
+                //瀑布流起始索引记录器 - 用于累计
+                CurrentAjaxStartIndexHF: $('#hfCurrentPageAjaxStartIndex'),
+                //瀑布流起始索引
+                StartIndex:$('#hfCurrentPageAjaxStartIndex').val() ? parseInt($('#hfCurrentPageAjaxStartIndex').val()) : 0,
+                //瀑布流结束索引
+                EndIndex: $('#hfCurrentPageAjaxEndIndex').val() ? parseInt($('#hfCurrentPageAjaxEndIndex').val()) : 0,
+
+                //分页容器
+                PagedContainer: $('.fr'),
+                //列容器ID前缀
+                ColumnFirstId: "J_lazyload",
+                //列数
+                ColumnNumber: 0,RowNumber: 4
+            });
+        });
+    </script>
+
+
+    @if (Model.ProductPagedList != null && Model.ProductPagedList.Count > 0)
+    {
+        <div class="listFilter">
+            <div class="listFilterL" >
+                <a href="@(ViewBag.BasePath)search/@cid/@brandid/default/@price/@keyword" mod="default">默认</a>
+                <a href="@(ViewBag.BasePath)search/@cid/@brandid/hot/@price/@keyword"  mod="hot">销量</a><a href="@(ViewBag.BasePath)search/@cid/@brandid/price/@price/@keyword" mod="price">价格</a><a href="@(ViewBag.BasePath)search/@cid/@brandid/new/@price/@keyword"  mod="new">上架时间</a>
+            </div>
+            <div class="listFilterR">
+                关键字:<span style="color:red;">@keyword</span> 共 <span style="color:red;">@ViewBag.TotalCount</span> 个商品
+            </div>
+        </div>
+        <div class="allGoods">
+            <ul class="products clearfix" id="J_lazyload">
+                @foreach (var item in Model.ProductPagedList)
+                {
+                    <li class="cur">
+                        <div class="pro_detail_left  clearfix">
+                            <div class="J_zoom">
+                                <a href="@(ViewBag.BasePath)Product/Detail/@item.ProductId" title="@item.ProductName" target="_blank">
+                                    <img title="@item.ProductName" alt="@item.ProductName" width="210" height="275" ref="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailUrl1, "T220X297_")">
+                                </a>
+                            </div>
+                        </div>
+                        <h2 class="name">
+                            <a target="_blank" title="@item.ProductName"  href="@item.SeoUrl">@item.ProductName</a><em
+                                                                                                                       class="hot"></em>
+                        </h2>
+                        <p class="price-wrap">
+                            <span class="price"><em>¥</em>@item.LowestSalePrice.ToString("F")</span> <span class="price-hot">
+                                                                                                     </span>
+                        </p>
+                        <p class="info">
+                            <a  href="javascript:;"  >已有<em>@item.SaleCounts</em>人购买</a>
+                        </p>
+                    </li>
+                }
+            </ul>
+            <div class="pagination">
+                @Html.AjaxPager(Model.ProductPagedList, new PagerOptions
+                    {
+                        ShowDisabledPagerItems = false,
+                        AlwaysShowFirstLastPageNumber = true,
+                        PageIndexParameterName = "pageIndex",
+                        NumericPagerItemCount = 10,
+                        CurrentPagerItemWrapperFormatString = "<span class=\"cur pageCurrent\">{0}</span>",
+                        CssClass = "fr",
+                        SeparatorHtml = ""
+                    }, new AjaxOptions { UpdateTargetId = "ProductListDiv" })
+              <input type="hidden" id="hfCurrentPageAjaxStartIndex" value="@ViewBag.CurrentPageAjaxStartIndex" />
+            <input type="hidden" id="hfCurrentPageAjaxEndIndex" value="@ViewBag.CurrentPageAjaxEndIndex" />
+            </div>
+        </div>
+    }
+
+
+
+

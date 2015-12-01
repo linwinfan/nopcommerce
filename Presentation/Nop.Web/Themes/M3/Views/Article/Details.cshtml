@@ -1,0 +1,93 @@
+﻿@{
+   Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+}
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/Areas/Shop/Themes/M3/Content/styles/style.css"/>
+
+@model Maticsoft.Model.CMS.Content
+<style type="text/css" >.left_common dt{
+     color: #807E7E;
+     font-size: 14px;
+     display: block;
+     padding-left: 30px;
+     line-height: 32px;
+     background: url('/Areas/Shop/Themes/M3/Content/images/ntlbg.png') no-repeat scroll 10px 7px transparent;
+     border-bottom: 1px solid #EBEBEB;
+     font-weight: bold;
+     font-family: Arial;
+ }
+ .left_common dd li {
+     height: 32px;
+     line-height: 32px;
+     font-size: 13px;
+     border-bottom: 1px dotted #DDD;
+     text-align: left;
+     letter-spacing: 0.1em;
+     width: 80%;
+     margin: 0 auto;
+     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+     padding-left: 25px;
+ }
+ .article_nav {
+     border:1px solid #ddd;
+     background:#fff;
+     border-bottom:none;
+     margin-top:-1px;
+ }
+ .help_title {
+     height:32px;
+     line-height:32px;
+     width:96%;
+     border-bottom:1px solid #c2151f;
+     margin:0 auto;
+     font-size:14px;
+     font-weight:bold;
+     font-family: Arial;
+ }
+ .rightdiv {
+width: 990px;
+background: #fff;
+height: auto !important;
+     float: right;
+min-height: 595px;
+}
+ </style>
+<script type="text/javascript">
+    $(function() {
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+        
+    });
+</script>
+<div class="contentWrap">
+    <!--商品分类开始-->
+    <div id="nav">
+        <div class="area clearfix">
+            <!--<div class="separate"></div>-->
+            <div class="category-content" id="guide_2">
+                <div style="width: 200px;height: 40px;">
+                    <span class="all-goods"><a href="javascript:;">全部商品分类</a></span></div>
+                <div class="category" id="category" style="display: none;">
+                    @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_IndexCateAll" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品分类结束-->
+</div>
+
+<div class="aw m0u clearfix" style="width: 1200px;margin:15px auto;">
+    <div class="location" style="margin-bottom: 15px;">您当前所在的位置：<a href="/">首页</a> &gt;  <a href="javascript:;">帮助中心</a> &gt; <span>常见问题</span></div>
+    <div class="leftdiv fl" style="border-bottom:1px solid #ddd;width: 200px;float: left;">
+    @Html.Action("LeftMenu", "Article", new { classid = Model.ClassID })
+ </div>
+    <div class="rightdiv fr">
+        <div class="help_title"><span>@Model.Title</span></div>
+        <div class="goods_list">
+            <div style="padding: 20px; line-height: 24px;">
+                @Html.Raw(Maticsoft.BLL.Settings.SEORelationManage.FilterStr(Model.Description, true, true, false, false, false, Model.ContentID, "CMSDescription"))
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>

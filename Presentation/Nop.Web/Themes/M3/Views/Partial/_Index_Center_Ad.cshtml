@@ -1,0 +1,7 @@
+﻿@model List<Maticsoft.Model.Settings.Advertisement>
+ @if (Model != null)
+ {
+     <div class="AdPositionId">
+         <a href="@Model[0].NavigateUrl"><img src="@Model[0].FileUrl" alt="@Model[0].AdvertisementName" title="@Model[0].AdvertisementName"/></a>
+     </div>
+ }

@@ -1,0 +1,35 @@
+﻿@model List<Maticsoft.Model.Shop.Products.ProductInfo>
+@{
+    <script type="text/javascript">
+        $(function () {
+            $.lazyFixedLoadImg('.pro_detail_left', 210, 275);
+        });
+    </script>
+
+    if (Model != null)
+    {
+        foreach (Maticsoft.Model.Shop.Products.ProductInfo item in Model)
+        {
+    <li class="cur">
+        <div class="pro_detail_left js-lists-imgtab clearfix">
+            <div class="J_zoom">
+                <a href="@(ViewBag.BasePath)Product/Detail/@item.ProductId" title="@item.ProductName" target="_blank">
+                    <img title="@item.ProductName" alt="@item.ProductName" width="210" height="275" ref="@Maticsoft.Web.Components.FileHelper.GeThumbImage(item.ThumbnailUrl1, "T220X297_")">
+                </a>
+            </div>
+        </div>
+        <h2 class="name">
+            <a target="_blank" title="@item.ProductName"  href="@item.SeoUrl">@item.ProductName</a><em
+                class="hot"></em>
+        </h2>
+        <p class="price-wrap">
+            <span class="price"><em>¥</em>@item.LowestSalePrice.ToString("F")</span> <span class="price-hot">
+            </span>
+        </p>
+        <p class="info">
+            <a href="javascript:;" class="metatit">已有<em>@item.SaleCounts</em>人购买</a>
+        </p>
+    </li>
+        }
+    }
+}

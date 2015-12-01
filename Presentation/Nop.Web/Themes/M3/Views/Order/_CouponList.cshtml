@@ -1,0 +1,234 @@
+﻿@model List<Maticsoft.Model.Shop.Coupon.CouponInfo>
+
+<div class="youhuijuan_left_con"  >
+    <div class="linmanav">
+        <ul>
+            <li><a href="javascript:;" item="1" class="coupon_a">填写优惠券</a></li>
+            <li><a href="javascript:;" class="current_coupon coupon_a" item="2" style="border-left: 1px #dadada solid;">
+                   选择优惠券</a></li>
+        </ul>
+    </div>
+    <div class="youhuijuan_left_con_zw">
+        <div class="lipinma" id="write_coupon"  style="display:none;height: 48px" >
+                <input id="txtcoupon" type="text" />
+            </div>
+        <div id="select_coupon">
+            @if (Model != null && Model.Count > 0)
+            {
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="yhm_hg">
+                    <tr>
+                        <td align="center">
+                            优惠码
+                        </td>
+                        <td align="right">
+                            面值
+                        </td>
+                        <td align="right">
+                            截止日期
+                        </td>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td align="left">
+                                <div class="w-chkbox">
+                                    <input type="radio" name="coupon" id="coupon_@(item.CouponCode)" code="@item.CouponCode" class="css-checkbox" />
+                                    <label for="coupon_@(item.CouponCode)" class="css-label radGroup1">@item.CouponCode
+                                    </label>
+                                </div>
+                            </td>
+                            <td align="right">￥@item.CouponPrice.ToString("F")
+                            </td>
+                            <td align="right">@(item.EndDate.ToString("yyyy-MM-dd").StartsWith("9999-") ? "无限制" : item.EndDate.ToString("yyyy-MM-dd"))
+                            </td>
+                        </tr>
+                    }
+                </table>
+@*<div class="ui-field-contain">
+        <label for="select-native-1">
+            可用优惠券：</label>
+        <select name="select-native-1" id="selectCoupon" style=" width:120px">
+            <option value="">请选择</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.CouponCode">@item.CouponName</option>
+            }
+        </select>
+       
+    </div>*@
+   
+            }
+            else
+            {
+                <div style="padding-left: 12px;">
+                    暂无可用优惠券</div> 
+            }
+        </div>
+        <div class="blank10">
+        </div>
+        <div class="btn_quxiao">
+            <input id="hfcoupon" type="hidden" />
+            @*  <input type="button" style="margin-left: 8px" class="btn-add" id="entityCouponId"  value="使用"/>*@
+            <a class="js" style="margin-right: 146px;cursor: pointer;" id="entityCouponId">使用</a> 
+            <a href="javascript:;"  id="a_cancel"  style="margin-left: 8px;">取消</a></div>
+    </div>
+</div>
+
+<style type="text/css">
+ 
+</style>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSelectCoupon").click(function () {
+            $(".youhuijuan_left_con").slideToggle(function () {
+            });
+        });
+        //优惠劵切换
+        $('.coupon_a').click(function () {
+            if ($(this).hasClass('current_coupon')) {
+                return;
+            }
+            $('.coupon_a').removeClass('current_coupon');
+            $(this).addClass('current_coupon');
+            if ($(this).attr('item') == '1') {
+                $('#write_coupon').show();
+                $('#select_coupon').hide();
+            } else {
+                $('#write_coupon').hide();
+                $('#select_coupon').show();
+            }
+        });
+
+        //取消使用
+        $("#a_cancel").click(function () {
+            cancelCoupon();
+        });
+
+
+        //使用优惠劵
+        $("#entityCouponId").die().click(function () {
+            //判断用户登录信息是否已过期
+            if (!CheckLogin()) {
+                window.location.replace($Maticsoft.BasePath + "account/login?returnUrl=" + $Maticsoft.BasePath + "Order/SubmitOrder");
+                return;
+            }
+            var code = "";
+            var basePrice = $("#payPriceId").attr("BasePrice");
+            var freightPrice = parseFloat($('#freightPriceId').attr('freightPrice')); //运费
+
+            if ($('.coupon_a.current_coupon').attr('item') == '1') { //填写优惠劵码
+                $('[id^="coupon_"]').attr('checked', false);
+                code = $("#txtcoupon").val();
+                if (code == "") {
+                    ShowFailTip("请输入优惠券卡号！");
+                    cancelCoupon();
+                    return;
+                }
+            } else { //使用账户中已有的优惠劵
+                $("#txtcoupon").val("");
+                if ($('[id^="coupon_"]:checked').attr('code')) {
+                    code = $('[id^="coupon_"]:checked').attr('code');
+                } else {
+                    code = '';
+                }
+                if (code == "") {
+                    ShowFailTip("请选择要使用的优惠劵！");
+                    cancelCoupon();
+                    return;
+                }
+            }
+
+            $("#hfcoupon").val("");
+            $.ajax({
+                type: "POST",
+                dataType: "text",
+                url: $Maticsoft.BasePath + "Order/AjaxGetCoupon",
+                data: { ConponCode: code, BasePrice: basePrice }, //, FreightPrice: freightPrice
+                success: function (data) {
+                    $("#hfcoupon").val("");
+                    $("#couponPriceId").attr('couponPrice', "0").text("-￥0.00");
+                    $("#payPriceId").text("￥" + (parseFloat(basePrice) + freightPrice).toFixed(2));
+                    if (data.split("|").length < 2) {
+                        GetActivList(0);
+                    }
+                    if (data == "False") {
+                        ShowFailTip('服务器繁忙，请稍候再试！');
+                        return;
+                    }
+                    if (data == "HasFrozen") {
+                        ShowFailTip('该优惠券处于冻结状态，不能使用！');
+                        return;
+                    }
+                    if (data == "UserError") {
+                        ShowFailTip('请您不要用别人的优惠券！');
+                        return;
+                    }
+                    if (data == "CouponExpired") {
+                        ShowFailTip('该优惠券已过期！');
+                        return;
+                    }
+                    if (data == "CouponNotStart") {
+                        ShowFailTip('该优惠券日期不在使用范围内！');
+                        return;
+                    }
+                    if (data == "No") {
+                        ShowFailTip('您输入的优惠券不存在或不在使用范围内！');
+                        return;
+                    }
+                    if (data == "Used") {
+                        ShowFailTip('您输入的优惠券已使用！');
+                        return;
+                    }
+                    if (data == "Limit") {
+                        ShowFailTip('您输入的优惠券不满足最低消费金额！');
+                        return;
+                    }
+                    if (data == "CategoryLimit") {
+                        ShowFailTip('不满足该优惠券指定分类商品的最低消费金额！');
+                        return;
+                    }
+                    if (data == "ProductLimit") {
+                        ShowFailTip('不满足该优惠券指定商品的最低消费金额！');
+                        return;
+                    }
+                    if (data == "SKULimit") {
+                        ShowFailTip('不满足该优惠券指定商品SKU的最低消费金额！');
+                        return;
+                    }
+                    if (data == "CategoryNo") {
+                        ShowFailTip('该优惠券只能在购买指定分类商品时使用！');
+                        return;
+                    }
+                    if (data == "ProductNo") {
+                        ShowFailTip('该优惠券只能在购买指定商品时使用！');
+                        return;
+                    }
+                    if (data == "SKUNo") {
+                        ShowFailTip('该优惠券只能在购买指定商品规格时使用！');
+                        return;
+                    }
+                    ShowSuccessTip('恭喜您，此优惠券可以使用！');
+                    $("#hfcoupon").val(code);
+                    var couponPrice = data.split("|")[0];
+                    $("#couponPriceId").attr('couponPrice', couponPrice).text("-￥" + couponPrice);
+                    var payPrice = parseFloat(data.split("|")[1]) + freightPrice;
+                    $("#payPriceId").text("￥" + (payPrice >= 0 ? payPrice : 0).toFixed(2));
+                    GetActivList(couponPrice);
+                }
+            });
+
+        });
+    });
+
+    //取消优惠劵使用
+    function cancelCoupon() {
+        var basePrice = $("#payPriceId").attr("BasePrice");
+        var freightPrice = parseFloat($('#freightPriceId').attr('freightPrice')); //运费
+        $('[id^="coupon_"]').attr('checked', false);
+        $('#txtcoupon').val('');
+        $('#hfcoupon').val('');
+        $("#couponPriceId").attr('couponPrice', 0).text("-￥0.00");
+        $("#payPriceId").text("￥" + (parseFloat(basePrice) + freightPrice).toFixed(2));
+        GetActivList(0);
+    }
+</script>

@@ -1,0 +1,152 @@
+﻿@model Maticsoft.ViewModel.Shop.ProductListModel
+@{
+    Layout = "/Areas/Shop/Themes/M3/Views/Shared/_BaseLayoutWithOutCate.cshtml";
+    string cid = Request.RequestContext.RouteData.Values["cid"] != null ? Request.RequestContext.RouteData.Values["cid"].ToString() : "0";
+    string brandid = Request.RequestContext.RouteData.Values["brandid"] != null ? Request.RequestContext.RouteData.Values["brandid"].ToString() : "0";
+    string keyword = Request.RequestContext.RouteData.Values["keyword"] != null ? Request.RequestContext.RouteData.Values["keyword"].ToString() : "";
+    string mod = Request.RequestContext.RouteData.Values["mod"] != null ? Request.RequestContext.RouteData.Values["mod"].ToString() : "default";
+    string price = Request.RequestContext.RouteData.Values["price"] != null ? Request.RequestContext.RouteData.Values["price"].ToString() : "0-0";
+}
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/search.css" type="text/css" />
+<link rel="stylesheet" href="/Areas/Shop/Themes/M3/Content/styles/list.css" type="text/css" />
+
+   @* <script src="/Scripts/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery/maticsoft.jquery.min.js" type="text/javascript"></script>*@
+<script src="/Scripts/jquery/maticsoft.waterfall.js" type="text/javascript"></script>
+<script src="/Scripts/jquery/maticsoft.img.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+<script type="text/javascript">
+    $(function () {
+
+           $.scaleLoad('.allGoods', 420, 420);
+        $("#guide_2").mouseover(function () { $("#category").show(); }).mouseout(function () { $("#category").hide(); });
+
+             $(".copyright").css("text-align", "center");
+                        var mod = '@mod';
+                                $(".listFilterL").find("a").each(function() {
+                        var mode = $(this).attr("mod");
+                        if (mode == mod) {
+                            $(this).addClass("select");
+                        }
+                    });
+                $("a[brandId='@brandid']").css({"background": "#c2151f","color": "#fff","padding": "0 5px"});
+                    $(".cateInfo[cateid='@cid']").addClass("cur");
+                $(".ddcate[cateid='@cid']").show();
+                $(".changeState").die("click").live("click", function() {
+                    var cid = $(this).attr("cateid");
+                    $(".ddcate[cateid='" + cid + "']").toggle();
+                    $(".cateInfo[cateid='" + cid + "']").toggleClass("cur");
+                });
+        $("#search_key").val('@keyword');
+        $("#bottomKeyword").val('@keyword'); 
+        $("#btnSearch").click(function () {
+            var keyword = $("#txtKeyWord").val();
+            if (keyword == "") {
+                ShowFailTip('请输入关键字！');
+                return;
+            }
+            location.href = "/search/0/0/default/0-0/" + keyword;
+        });
+
+    })
+</script>
+ 
+<!--listMainContWrap开始-->
+<div class="listMainContWrap">
+    <div class="listMainCont">
+        <div class="listMainContTitle">
+            <a href="@(ViewBag.BasePath)">首页</a>
+            @if (Model.CategoryPathList != null && Model.CategoryPathList.Count > 0)
+            {
+                foreach (var item in Model.CategoryPathList)
+                {
+                    <a href="@(ViewBag.BasePath)search/@item.CategoryId/@brandid/@mod/@price/@keyword">>@item.Name</a>
+           
+                }
+            }
+            <a href="javascript:;">>关键词：@keyword (共找到 <span id="spPCount">@ViewBag.TotalCount </span>个商品)</a>
+
+        </div>
+        <!--listMainContL开始-->
+        <div class="listMainContL">
+            <!--leftnav开始-->
+            <div class="leftnav">
+                <div class="all">
+                    所有类目</div>
+                @Html.Action("CategoryList", "Partial", new { Cid = 0, Top = 8, viewName = "_ProductListCateAll" })
+            </div>
+            <!--leftnav结束-->
+            <!--promotionGoods开始-->
+            <div class="promotionGoods">
+                <div class="promotionGoodsTitle">
+                    推广商品</div>
+                @Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.IndexRec, Cid = cid, Top = 4, ViewName = "_ProductIndexRec" })
+            </div>
+            <!--promotionGoods结束-->
+            <!--salesList开始-->
+            <div class="salesList">
+                <div class="salesListTitle">
+                    一周销量排行榜</div>
+                @Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.Latest, Cid = cid, Top = 4, ViewName = "_ProductIndexLatest" })
+            </div>
+            <!--salesList结束-->
+            <!--hotStore开始-->
+            <div class="hotStore">
+                <div class="hotStoreTitle">
+                    热门店铺</div>
+                @Html.Action("RecStore", "Partial", new { top = 1 })
+            </div>
+            <!--hotStore结束-->
+        </div>
+        <!--listMainContL结束-->
+        <!--listMainContR开始-->
+        <div class="listMainContR">
+                        <!--搜索店铺-->
+       @Html.Action("Store", "Search", new { keyword = keyword })
+
+            <div class="SearchRecommendWrap">
+                <dl class="relevantSearch">
+                    <dt>相关搜索:&nbsp;&nbsp;&nbsp;</dt>
+                    @Html.Action("HotKeyword", "Partial", new { Cid = cid, Top = 8, ViewName = "_RelateKeyword" })
+                </dl>
+            </div>
+            <div class="catelog" style="border-top: none; margin-top: 0; padding: 0;">
+                @*<div class="hd" style="padding:0 0 6px 0;">
+                    	<span class="title"><h5 class="strong">衬衫</h5> &gt; 商品筛选</span>
+                    </div>*@
+                <div class="productParameters">
+                    <!--row1开始-->
+                    @Html.Action("BrandList", "Product", new { cid = Model.CurrentCid, ViewName = "_SearchBrands", top = -1 })
+                    @*                @Html.Action("AttrList","Product", new { cid = Model.CurrentCid, ViewName = "_AttrList", top = -1 })*@
+                </div>
+            </div>
+            <!--allGoodsWrap开始-->
+            <div class="allGoodsWrap" id="ProductListDiv">
+            @{Html.RenderPartial("_ProductList", Model);}          
+            </div>
+            <!--allGoodsWrap结束-->
+            <!--商品精选开始-->
+            @Html.Action("ProductRec", "Partial", new { Type = Maticsoft.Model.Shop.Products.ProductRecType.Recommend, Cid = cid, Top = 4, ViewName = "_ProductIndexBottomRec" })
+            <!--商品精选结束-->
+            <!--重新搜索开始-->
+            <div class="searchAgainWrap">
+                <div class="searchAgain">
+                    重新搜索</div>
+                <div class="searchAgainInput">
+                    <input type="text" placeholder="请输入关键词" id="bottomKeyword" />
+                    <button class="search-btn">
+                        搜 索</button>
+                </div>
+            </div>
+            <!--重新搜索结束-->
+            @Html.Action("AdDetail", "Partial", new { id = 74, ViewName = "_Group_Ad_Bottom" })
+        </div>
+        <!--listMainContR结束-->
+    </div>
+    <script type="text/javascript">
+        //new LazyLoad('#J_lazyload');
+
+        //    $(BindSearchResultEvent);
+</script>
+</div>

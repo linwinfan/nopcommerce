@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Areas/Shop/Themes/M3/Views/Shared/_SiteLayout.cshtml";
+
+}
+<link href="/Areas/Shop/Themes/M3/Content/styles/zzsc.css" type="text/css" rel="stylesheet" />
+<link href="/Areas/Shop/Themes/M3/Content/styles/list.css" rel="stylesheet" type="text/css" />
+@section head{
+    @RenderSection("head", false)
+}
+    @Html.Action("Header", "Partial", new { area = "Shop" ,viewName="_HeaderRecharge"})
+
+    @RenderBody()
+    @Html.Action("Footer", "Partial", new { area = "Shop" })
+    @section foot{
+        @RenderSection("foot", false)
+    }
+<script type="text/javascript">
+    $(function() {
+        $(".copyright").show();
+        $("body").css("background", "none");
+        $(".copyright").css("text-align", "center");
+    });
+</script>

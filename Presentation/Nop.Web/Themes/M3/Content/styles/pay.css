@@ -1,0 +1,95 @@
+﻿.order-wrapper{margin:0 auto;width:1180px; margin-top:10px; background:#fff6e5; border:1px solid #ffb303; font-size:12px; padding:10px;}
+.successk{text-align:center; line-height:30px;  }
+.successk_title{background:url(../images/greeting.gif) no-repeat -929px -102px;height:76px;line-height:76px; text-align:left;padding-left:60px;margin-left:273px;}
+.payment-mode{clear:both;zoom:1;margin-top:16px;position:relative;z-index:1;overflow:hidden;}
+.payment-mode span{ float:left; font-weight:bold; font-size:14px;padding-right:5px;padding-left:10px;}
+.payment-mode li{float:left; background:url(../images/greeting.gif) no-repeat -363px -145px;width:86px;height:30px; cursor:pointer;line-height:30px;margin-left:5px; display:inline;}
+
+.payment-mode li.on{ background:url(../images/greeting.gif) no-repeat -455px -145px; font-weight:bold;}
+
+.payment-content{background:#FFF; border:1px solid #efd9af; padding:16px; clear:both; overflow:hidden;margin-top:-1px;text-align:left;padding:20px;zoom:1;position:relative;z-index:0;}
+.payment-bank li{ clear:both; overflow:hidden;margin-top:10px;}
+
+.onlinepay_option {float: left; border: 1px solid #bbb; width: 150px; height:40px; text-align: center; cursor: pointer; background-image: url(/images/bankicon.png); background-repeat:no-repeat; display:inline;}
+
+.payment-bank .bac{margin-top:24px;margin-left:75px;}
+.on_linelist li{margin-top:20px; margin:14px; display:inline;}
+.bank1{background-position: 20px -36px; text-indent:-19888px;}
+.bank2{background-position: 20px -475px; text-indent:-19888px;}
+.bank3{background-position: 30px -514px; text-indent:-19888px;}
+.bank4{background-position: 20px -315px; text-indent:-19888px;}
+.bank5{background-position: 24px -75px; text-indent:-19888px;}
+.bank6{background-position: 31px -353px; text-indent:-19888px;}
+.bank7{background-position: 12px -275px; text-indent:-19888px;}
+.bank8{background-position: 31px -596px; text-indent:-19888px;}
+.bank9{background-position: 17px -393px; text-indent:-19888px;}
+.bank10{background-position: 17px -194px; text-indent:-19888px;}
+.bank11{background-position: 17px -115px; text-indent:-19888px;}
+.bank12{background-position: 17px -3360px; text-indent:-19888px;}
+.bank13{background-position: 17px -441px; text-indent:-19888px;}
+.bank14{background-position: 17px -678px; text-indent:-19888px;}
+.hover{ border:1px solid #e33300;}
+
+.help_paymentg li{ clear:both; overflow:hidden;zoom:1; border-bottom:1px dashed #ccc; padding-bottom:20px; padding-top:10px;}
+.help_paymentg li .k{padding-left:20px;font-size:14px;line-height:24px;width:500px;color:#7a7a7a;float:left;text-align:justify;}
+
+
+
+.settlement{border:none;color:#fff;background:url(/images/order.gif) no-repeat -90px -54px;width:103px;height:28px;cursor:pointer;font-weight:bold;font-size:14px;float:right;}
+.popup-title,.popup-button,.popup-title span,.problemspopup-title,.problemspopup-button,.pro_close,.problem_a .z{background:url(../images/popup.gif) no-repeat;}
+.problemspopup{width:353px;}
+.problemspopup-title{width:353px; height:11px;overflow:hidden;background-position:0 -89px;}
+.problemspopup-centent{border-left:1px solid #ccc;border-right:1px solid #ccc;background:#fff;position:relative;}
+.problemspopup-centent .pro_close{ position:absolute;right:10px;top:8px; font-weight:bold;cursor:pointer; background-position:-288px -49px; width:20px;height:20px; line-height:20px;overflow:hidden;text-indent:-9999px;}
+.problemspopup-button{width:353px; height:11px;overflow:hidden;background-position:0 -261px;}
+.problemspopup-loading{position:absolute; left:24px; top:78px;}
+.problem_a{padding:10px; line-height:26px;}
+.problem_a .z{font-weight:bold;width:80px;color:#242424;height:26px;line-height:26px;background-position:0 -273px;text-align:center; display:inline-block;}
+.problem_a a.z:hover{ text-decoration:none;color:#242424;}
+.btn-impay {align-items: flex-start;
+            text-align: center; 
+            display: inline-block;
+line-height: 100px;
+overflow: hidden;
+border: none;
+line-height: 150px;
+font-size: 0;
+vertical-align: middle;
+width: 155px;
+height: 38px;
+background-repeat: no-repeat;
+cursor: pointer;
+background: url(../images/btn-03.png) no-repeat;
+
+}
+
+/**继续支付按钮**/
+.btn-conti 
+{
+    display: inline-block;
+line-height: 100px;
+overflow: hidden;
+border: none;
+line-height: 150px;
+font-size: 0;
+vertical-align: middle;
+width: 155px;
+height: 38px;
+background-repeat: no-repeat;
+cursor: pointer;
+background: url(../images/btn-08.png) no-repeat;
+
+}
+	#headerlogo {
+	    float: left;
+width: 285px;
+height: 50px;
+text-indent: -9999px;
+margin-top: 20px;
+}
+
+.txtenddate span {
+    font-size: 14px;
+    color: #666;
+    font-weight: bold;
+}

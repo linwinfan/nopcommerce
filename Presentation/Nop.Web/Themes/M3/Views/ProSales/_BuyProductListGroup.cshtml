@@ -1,0 +1,84 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<Maticsoft.Model.Shop.PromoteSales.GroupBuy>
+<script type="text/javascript">
+    function countDown(time, val) {
+        var day_elem = $(val).find('.day');
+        var hour_elem = $(val).find('.hour');
+        var minute_elem = $(val).find('.minute');
+        var second_elem = $(val).find('.second');
+
+        var end_time = new Date(time).getTime(), //月份是实际月份-1
+            sys_second = (end_time - new Date().getTime()) / 1000;
+        var timer = setInterval(function () {
+            if (sys_second > 1) {
+                sys_second -= 1;
+                var day = Math.floor((sys_second / 3600) / 24);
+                var hour = Math.floor((sys_second / 3600) % 24);
+                var minute = Math.floor((sys_second / 60) % 60);
+                var second = Math.floor(sys_second % 60);
+                day_elem && $(day_elem).text(day); //计算天
+                $(hour_elem).text(hour < 10 ? "0" + hour : hour); //计算小时
+                $(minute_elem).text(minute < 10 ? "0" + minute : minute); //计算分钟
+                $(second_elem).text(second < 10 ? "0" + second : second); //计算秒杀
+            } else {
+                clearInterval(timer);
+            }
+        }, 1000);
+    }
+    $(function () {
+        $(".unit-time").each(function () {
+            countDown($(this).attr("data-time"), $(this));
+        });
+    });
+
+</script>
+<!--团购精选开始-->
+<div id="ProductListDiv">
+  <div class="groupSelectionWrap" >
+    <div class="groupSelectionCont" >
+        <div>
+            @if (Model != null && Model.Count > 0)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                <div class="Selection1 Selection@(i % 3 + 1)">
+                    <dl>
+                        <dt><a href="@(ViewBag.BasePath)Product/GroupBuyDetail/@Model[i].GroupBuyId">
+                            <img width="300" height="300" src="@Maticsoft.Web.Components.FileHelper.GeThumbImage(Model[i].GroupBuyImage, "T350X350_")" /></a></dt>
+                        <dd style="height: 41px;overflow: hidden;">
+                            <a href="@(ViewBag.BasePath)Product/GroupBuyDetail/@Model[i].GroupBuyId">@Model[i].ProductName</a></dd>
+                        <dd>
+                            <p class="pL">
+                                <span><strong>@Model[i].Price.ToString("C")</strong></span>
+                            </p>
+                            <p class="pR unit-time" data-time="@Model[i].EndDate"  endDate="@((Model[i].EndDate.ToUniversalTime() - Convert.ToDateTime("1970-01-01")).TotalMilliseconds.ToString("0"))" Product="@Model[i].ProductId"  id="txtenddate_@(Model[i].ProductId)">
+                                <span class="icon"></span><em><span class=" day timespan" id="dayEnd_@(Model[i].ProductId)">
+                                    00</span> 天</em> <em><span class="hour timespan" id="hourEnd_@(Model[i].ProductId)">
+                                        00</span>时</em> <span class="minute timespan" id="minEnd_@(Model[i].ProductId)">00</span><em>分</em>
+                                <span  class="second timespan" id="secEnd_@(Model[i].ProductId)" >00</span> <em>秒</em>
+                            </p>
+                        </dd>
+                    </dl>
+                </div>
+                }
+            }</div>
+    </div>
+</div>
+<div class="page">
+        <div>
+            @Html.AjaxPager(Model, new PagerOptions
+                                {
+                                    ShowDisabledPagerItems = true,
+                                    AlwaysShowFirstLastPageNumber = true,
+                                    PageIndexParameterName = "pageIndex",
+                                    NumericPagerItemCount = 6,
+                                    CurrentPagerItemWrapperFormatString = "<a class=\"current\">{0}</a>",
+                                    CssClass = "page",
+                                    SeparatorHtml = ""
+                                }, new AjaxOptions { UpdateTargetId = "ProductListDiv" })
+            <input type="hidden" id="hfCurrentPageAjaxStartIndex" value="@ViewBag.CurrentPageAjaxStartIndex" />
+            <input type="hidden" id="hfCurrentPageAjaxEndIndex" value="@ViewBag.CurrentPageAjaxEndIndex" />
+        </div>
+</div>  
+</div>
+

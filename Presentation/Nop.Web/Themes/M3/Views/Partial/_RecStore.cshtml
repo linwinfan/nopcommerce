@@ -1,0 +1,16 @@
+﻿@model  List<Maticsoft.Model.Shop.Supplier.SupplierInfo>
+<div class="hotStoreCont">
+     @if (Model != null && Model.Count > 0)
+     {
+         foreach (var item in Model)
+         {
+      <dl  class="hotStoreCont_dl">
+          <dt><a href="@(ViewBag.BasePath)Store/@item.SupplierId"><img style="width:160px;height:160px;"   alt="@item.ShopName"   src="/Partial/SuppLogo?id=@(item.SupplierId)&size=T200X200" onerror="this.onerror=null;this.src='/Content/themes/base/images/404/404_200X200.jpg'"></a></dt>
+        <dd></dd>
+        <dd class="red"></dd>
+    </dl>
+         }
+     }
+</div>
+            
+

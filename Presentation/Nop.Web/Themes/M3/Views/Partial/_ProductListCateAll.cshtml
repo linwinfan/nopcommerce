@@ -1,0 +1,22 @@
+﻿@using Maticsoft.Web.SMSService
+@model List<Maticsoft.Model.Shop.Products.CategoryInfo>
+<div class="leftnav">
+    @if (Model != null && Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+  <dl class="cate  cateInfo" cateid="@item.CategoryId">
+      <dt style="background:#f8f8f8">
+          <h4><a  href="@(ViewBag.BasePath)product/@item.CategoryId" target="_blank"  title="@item.Name">@Maticsoft.Common.StringPlus.SubString(item.Name, 10, "...")</a>
+          </h4><i class="changeState" cateid="@item.CategoryId"></i>
+      </dt><div cateid="@item.CategoryId" class="ddcate" style="display: none;">
+                            @Html.Action("CategoryList", "Partial", new { Cid = item.CategoryId, Top = 20, viewName = "_ProductListSecondCate" })
+</div>
+
+    </dl>
+        }
+    }
+    
+
+                  
+</div>
